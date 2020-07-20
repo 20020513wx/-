@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+//测试
+Route::prefix("/index")->group(function(){
+    Route::get('/cart','Cart\CartController@cart');
+});

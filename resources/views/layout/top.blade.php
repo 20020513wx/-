@@ -10,11 +10,9 @@
     <meta name="HandheldFriendly" content="True">
 
     <link rel="stylesheet" href="/static/css/materialize.css">
-<<<<<<< HEAD:resources/views/layouts/top.blade.php
-    <link rel="stylesheet" href="/status/font-awesome/css/font-awesome.min.css">
-=======
+
     <link rel="stylesheet" href="/static/font-awesome/css/font-awesome.min.css">
->>>>>>> 5d9150d493fda13f332d914ee447887b2d01e9b0:resources/views/layout/top.blade.php
+
     <link rel="stylesheet" href="/static/css/normalize.css">
     <link rel="stylesheet" href="/static/css/owl.carousel.css">
     <link rel="stylesheet" href="/static/css/owl.theme.css">

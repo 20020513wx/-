@@ -1,4 +1,4 @@
-@extends("layouts.top")
+@extends("layout.top")
 @section("title",'收货地址添加')
 @section('content')
     <div class="cart section">

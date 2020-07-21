@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//测试
+//购物车
 Route::prefix("/index")->group(function(){
-    Route::get('/cart','Cart\CartController@cart');
+    Route::get('index/cart','Index\CartController@cart');
 });

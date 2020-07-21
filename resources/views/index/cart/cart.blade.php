@@ -1,4 +1,4 @@
-@extends("layout.top")
+@extends("layouts.top")
 @section("title",'收货地址添加')
 @section('content')
     <div class="cart section">
@@ -122,7 +122,7 @@
             <button class="btn button-default">Process to Checkout</button>
         </div>
     </div>
-    <!-- end cart -->
+    <!-- end index -->
 
     <!-- loader -->
     <div id="fakeLoader"></div>

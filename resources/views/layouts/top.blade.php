@@ -11,17 +11,17 @@
     <meta name="apple-touch-fullscreen" content="yes">
     <meta name="HandheldFriendly" content="True">
 
-    <link rel="stylesheet" href="/status/css/materialize.css">
+    <link rel="stylesheet" href="/static/css/materialize.css">
     <link rel="stylesheet" href="/status/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/status/css/normalize.css">
-    <link rel="stylesheet" href="/status/css/owl.carousel.css">
-    <link rel="stylesheet" href="/status/css/owl.theme.css">
-    <link rel="stylesheet" href="/status/css/owl.transitions.css">
-    <link rel="stylesheet" href="/status/css/fakeLoader.css">
-    <link rel="stylesheet" href="/status/css/animate.css">
-    <link rel="stylesheet" href="/status/css/style.css">
+    <link rel="stylesheet" href="/static/css/normalize.css">
+    <link rel="stylesheet" href="/static/css/owl.carousel.css">
+    <link rel="stylesheet" href="/static/css/owl.theme.css">
+    <link rel="stylesheet" href="/static/css/owl.transitions.css">
+    <link rel="stylesheet" href="/static/css/fakeLoader.css">
+    <link rel="stylesheet" href="/static/css/animate.css">
+    <link rel="stylesheet" href="/static/css/style.css">
 
-    <link rel="shortcut icon" href="img/favicon.png">
+    <link rel="shortcut icon" href="/static/img/favicon.png">
 
 </head>
 
@@ -64,12 +64,12 @@
     </div>
 </div>
 <!-- scripts -->
-<script src="/status/js/jquery.min.js"></script>
-<script src="/status/js/materialize.min.js"></script>
-<script src="/status/js/owl.carousel.min.js"></script>
-<script src="/status/js/fakeLoader.min.js"></script>
-<script src="/status/js/animatedModal.min.js"></script>
-<script src="/status/js/main.js"></script>
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/materialize.min.js"></script>
+<script src="/static/js/owl.carousel.min.js"></script>
+<script src="/static/js/fakeLoader.min.js"></script>
+<script src="/static/js/animatedModal.min.js"></script>
+<script src="/static/js/main.js"></script>
 @yield('content')
 </body>
 </html>

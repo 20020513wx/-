@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
@@ -28,8 +27,7 @@
 
 </head>
 <body>
-=======
->>>>>>> cf0722f1263bbbcca67ee2f7a36371ef55bf0ac8
+
 
 <!-- navbar top -->
 <div class="navbar-top">
@@ -42,7 +40,7 @@
         <a href="#" data-activates="slide-out-right" class="side-nav-left"><i class="fa fa-user"></i></a>
     </div>
 </div>
-<<<<<<< HEAD
+
 
 
 
@@ -365,5 +363,4 @@
 @yield('content')
 </body>
 </html>
-=======
->>>>>>> cf0722f1263bbbcca67ee2f7a36371ef55bf0ac8
+

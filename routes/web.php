@@ -67,7 +67,7 @@ Route::prefix("/admin")->middleware("islogin")->group(function(){
 
 
 //后台用户
-Route::prefix("/admin")->group(function(){
+Route::prefix("/admin")->middleware("islogin")->group(function(){
     Route::get('/userindex','Admin\UserController@userindex');//用户展示
     Route::get('delete/{id}','Admin\UserController@delete');//删除
     Route::get('edit/{id}','Admin\UserController@edit');//编辑展示

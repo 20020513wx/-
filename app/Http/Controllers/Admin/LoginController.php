@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 use App\Model\User;
-class UserController extends Controller
+class LoginController extends Controller
 {
     //注册
     public function reg(){

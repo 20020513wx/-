@@ -33,3 +33,16 @@ Route::prefix("/myord")->group(function(){
     Route::get("/index","Myord\MyordController@index");
 });
 
+
+//后台商品分类
+Route::prefix("/admin")->group(function(){
+   Route::get('/category_index','Admin\CategoryController@index');   //展示
+   Route::get('/category_create','Admin\CategoryController@create');   //试图
+    Route::post('/category_store','Admin\CategoryController@store');   //试图
+
+    Route::get('/category_destory/{id}','Admin\CategoryController@destroy');//删除
+
+    Route::get('/category_edit/{id}','Admin\CategoryController@edit');//修改视图
+    Route::post('/category_update/{id}','Admin\CategoryController@update');//修改视图
+});
+

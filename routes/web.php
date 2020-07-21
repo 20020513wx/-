@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+//个人中心
+
+Route::prefix("/myord")->group(function(){
+    Route::get("/index","Myord\MyordController@index");
+});

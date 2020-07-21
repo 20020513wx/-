@@ -9,6 +9,7 @@
     <meta name="apple-touch-fullscreen" content="yes">
     <meta name="HandheldFriendly" content="True">
 
+
     <link rel="stylesheet" href="/static/css/materialize.css">
     <link rel="stylesheet" href="/static/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/static/css/normalize.css">
@@ -25,9 +26,26 @@
 
 
 
+
 </head>
 <body>
 
+
+<!-- side nav right-->
+<div class="side-nav-panel-right">
+    <ul id="slide-out-right" class="side-nav side-nav-panel collapsible">
+        <li class="profil">
+            <img src="/static/img//profile.jpg" alt="">
+            <h2>John Doe</h2>
+        </li>
+        <li><a href="setting.html"><i class="fa fa-cog"></i>Settings</a></li>
+        <li><a href="about-us.html"><i class="fa fa-user"></i>About Us</a></li>
+        <li><a href="contact.html"><i class="fa fa-envelope-o"></i>Contact Us</a></li>
+        <li><a href="login.html"><i class="fa fa-sign-in"></i>Login</a></li>
+        <li><a href="register.html"><i class="fa fa-user-plus"></i>Register</a></li>
+    </ul>
+</div>
+<!-- end side nav right-->
 
 <!-- navbar top -->
 <div class="navbar-top">
@@ -42,9 +60,6 @@
 </div>
 
 
-
-
-<!-- end navbar top -->
 <div class="navbar-bottom">
     <div class="row">
         <div class="col s2">
@@ -242,6 +257,12 @@
 </div>
 <!-- end menu -->
 
+
+
+
+
+
+
 <!-- cart menu -->
 <div class="menus" id="animatedModal">
     <div class="close-animatedModal close-icon">
@@ -254,7 +275,11 @@
                     <div class="cart-1">
                         <div class="row">
                             <div class="col s5">
+
+                            
+
                                 <img src="/static/img/cart-menu1.png" alt="">
+
                             </div>
                             <div class="col s7">
                                 <h5><a href="">Fashion Men's</a></h5>
@@ -289,7 +314,11 @@
                     <div class="cart-2">
                         <div class="row">
                             <div class="col s5">
+
+                              
+
                                 <img src="/static/img/cart-menu2.png" alt="">
+
                             </div>
                             <div class="col s7">
                                 <h5><a href="">Fashion Men's</a></h5>
@@ -353,6 +382,16 @@
     </div>
 </div>
 <!-- end cart menu -->
+
+
+
+
+
+
+
+
+
+
 <!-- scripts -->
 <script src="/static/js/jquery.min.js"></script>
 <script src="/static/js/materialize.min.js"></script>

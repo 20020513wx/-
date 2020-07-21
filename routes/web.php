@@ -15,6 +15,7 @@ Route::prefix('index')->group(function(){
 	Route::get('/goodsindex','Index\GoodsController@goodsindex');
 	Route::get('/goodslists','Index\GoodsController@goodslists');
 });
+
 //后台管理员
 Route::prefix("/admin")->group(function (){
     Route::get("/reg","Admin\UserController@reg");   //注册
@@ -22,6 +23,17 @@ Route::prefix("/admin")->group(function (){
     Route::get("/login","Admin\UserController@login");     //登录
     Route::post("/logindo","Admin\UserController@logindo");   // 登录执行
 });
+
+//前台用户
+Route::prefix("index")->group(function (){
+   //登录
+    Route::get('/login','Index\LoginController@login');
+    //注册
+   Route::get('/reg','Index\LoginController@reg');
+});
+
+
+
 //购物车
 Route::prefix("/index")->group(function(){
     Route::get('/index/cart','Index\CartController@cart');
@@ -30,3 +42,4 @@ Route::prefix("/index")->group(function(){
 Route::prefix("/myord")->middleware("islogin")->group(function(){
     Route::get("/index","Myord\MyordController@index");
 });
+

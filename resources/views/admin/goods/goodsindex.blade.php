@@ -19,7 +19,7 @@
         <td>{{$v->goods_desc}}</td>
         <td>{{$v->goods_num}}</td>
         <td>{{$v->goods_img}}</td>
-        <td></td>
+        <td align="left">{{str_repeat('==',$v->level)}}{{$v->cate_name}}</td>
         <td>
             <a href="{{url('admin/goodsdelete/'.$v->goods_id)}}">删除</a>
             <a href="{{url('admin/goodsedit/'.$v->goods_id)}}">编辑</a>

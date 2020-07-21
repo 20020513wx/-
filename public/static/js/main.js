@@ -8,8 +8,8 @@ $(function(){
 
 	});
 
-	$("#index-menu").animatedModal();
-
+	$("#cart-menu").animatedModal();
+	
 	$("#nav-menu").animatedModal({
 		modalTarget: 'animatedModal2'
 	});
@@ -48,7 +48,7 @@ $(function(){
 
 	// loader
     $("#fakeLoader").fakeLoader({
-
+      
       zIndex: 999,
       spinner: 'spinner4',
       bgColor: '#191919'
@@ -60,5 +60,5 @@ $(function(){
 	});
 
     $('select').material_select();
-
+    
 });

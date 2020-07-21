@@ -5,95 +5,111 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\Goods;
+use App\Model\Category;
 use Validator;
 class GoodsController extends Controller
 {
     //商品展示
     public function index(){
-        $res=Goods::get();
+        $res=Goods::leftjoin('category','goods.cate_id','=','category.cate_id')->get();
         return view('admin.goods.goodsindex',['res'=>$res]);
     }
     //商品添加视图
     public function create(){
-        return view('admin.goods.goodscreate');
+        $cateInfo=Category::getcateinfo();
+        return view('admin.goods.goodscreate',['cateInfo'=>$cateInfo]);
     }
-    //商品添加执行
-    public function store(){
-        $data=request()->except('_token');
+    
+    public function store(Request $request)
+    {
+        //添加方法
+        $data=$request->except(['_token']);
         $validator=Validator::make($data,[
             'goods_name'=>'required|unique:goods',
+            'goods_num'=>'required',
             'goods_price'=>'required',
-            'goods_desc'=>'required',
-            'goods_num'=>'required'
         ],[
-            'goods_name.required'=>'商品名称不能为空',
-            'goods_name.unique'=>'商品名称不能重复',
-            'goods_price.required'=>'商品单价不能为空',
-            'goods_desc.required'=>'商品描述不能为空',
-            'goods_num.required'=>'商品库存不能为空',
+            'goods_name.required'=>'商品名称必填！',
+            'goods_name.unique'=>'商品名称已存在！',
+            'goods_num.required'=>'商品库存必填！',
+            'goods_price.required'=>'商品单价必填！',
         ]);
         if($validator->fails()){
             return redirect('admin/goodscreate')->withErrors($validator)->withInput();
         }
+
+        
+
+        //如果有文件信息，就调用其方法执行文件上传
         if(request()->hasFile('goods_img')){
             $data['goods_img']=$this->upload('goods_img');
         }
+        //实现添加
         $res=Goods::insert($data);
         if($res){
             return redirect('admin/goodsindex');
         }
     }
 
-    //文件上传
-    function upload($filename){
-        if(request()->file($filename)->isValid()){
-            $file=request()->$filename;
-            $path=$file->store('uploads');
-            return $path;
+        //上传文件
+        function upload($filename){
+            //判断上传文件过程中是否出错
+            if(request()->file($filename)->isValid()){
+                //正确就接收文件
+                $file=request()->$filename;
+                //保存进入目录
+                $path=$file->store('uploads');
+                return $path;
+            }
+            exit('文件上传有误');
         }
-        exit('文件上传有误');
-    }
 
-    //删除
-    public function delete($id){
-        $res=Goods::destroy($id);
-        return redirect('admin/goodsindex');
-    }
-
-    //修改
-    public function edit($id){
+    public function edit($id)
+    {
+        //修改视图
         $res=Goods::find($id);
-        return view('admin.goods.goodsedit',['res'=>$res]);
+        $cateInfo=Category::getcateinfo();
+        return view('admin.goods.goodsedit',['res'=>$res,'cateInfo'=>$cateInfo]);
     }
 
-    //修改执行
-    public function update($id){
-        $data=request()->except('_token');
+  
+    public function update(Request $request, $id)
+    {
+        //修改执行
+        $data=$request->except(['_token']);
         $validator=Validator::make($data,[
             'goods_name'=>'required|unique:goods',
+            'goods_num'=>'required',
             'goods_price'=>'required',
-            'goods_desc'=>'required',
-            'goods_num'=>'required'
         ],[
-            'goods_name.required'=>'商品名称不能为空',
-            'goods_name.unique'=>'商品名称不能重复',
-            'goods_price.required'=>'商品单价不能为空',
-            'goods_desc.required'=>'商品描述不能为空',
-            'goods_num.required'=>'商品库存不能为空',
+            'goods_name.required'=>'商品名称必填！',
+            'goods_name.unique'=>'商品名称已存在！',
+            'goods_num.required'=>'商品库存必填！',
+            'goods_price.required'=>'商品单价必填！',
         ]);
         if($validator->fails()){
             return redirect('admin/goodscreate')->withErrors($validator)->withInput();
         }
+
+        
+
+        //如果有文件信息，就调用其方法执行文件上传
         if(request()->hasFile('goods_img')){
             $data['goods_img']=$this->upload('goods_img');
         }
-        $where=[
-            ['goods_id','=',$id]
-        ];
-        $res=Goods::where($where)->update($data);
+        $res=Goods::where('goods_id',$id)->update($data);
         if($res){
             return redirect('admin/goodsindex');
         }
     }
 
+    //删除方法
+    public function delete($id)
+    {
+        $res=Goods::destroy($id);
+        if($res){
+            return redirect('admin/goodsindex');
+        }
+    }
+   
 }

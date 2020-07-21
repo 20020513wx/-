@@ -16,7 +16,7 @@
     if (!$) throw new Error('Filterizr requires jQuery to work.');
 
     /**
-    * Modified version of Jake Gordon's Bin Packing algorithm used for Filterizr's 'packed' layouts
+    * Modified version of Jake Gordon's Bin Packing algorithm used for Filterizr's 'packed' layout
     * @see {@link https://github.com/jakesgordon/bin-packing}
     */
     var Packer = function(w) {
@@ -588,7 +588,7 @@
                 }
                 containerHeight = packer.root.h;
             }
-            //Horizontal layouts
+            //Horizontal layout
             if (self.options.layout === 'horizontal') {
                 rows = 1;
                 for (i = 1; i <= array.length; i++) {
@@ -602,7 +602,7 @@
                     if (containerHeight < itemHeight) containerHeight = itemHeight;
                 }
             }
-            //Vertical layouts
+            //Vertical layout
             else if (self.options.layout === 'vertical') {
                 for (i = 1; i <= array.length; i++) {
                     itemHeight = array[i - 1].outerHeight();
@@ -886,7 +886,7 @@
             //Public properties - used for sorting
             self.domIndex = index;
             self.sortData = self.data('sort');
-            //Item Dimensions used for Bin Packing algorithm (packed layouts) and sorting.
+            //Item Dimensions used for Bin Packing algorithm (packed layout) and sorting.
             self.w = 0;
             self.h = 0;
             //self states

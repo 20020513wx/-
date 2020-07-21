@@ -7,10 +7,12 @@
     商品描述<textarea name="goods_desc"></textarea>{{$errors->first('goods_desc')}}<br>
     商品库存<input type="text" name="goods_num">{{$errors->first('goods_num')}}<br>
     商品图片<input type="file" name="goods_img"><br>
-    商品所属分类<select name="">
-        <option value="">请选择...</option>
-        <option value=""></option>
-    </select><br>
+    商品所属分类<select name="cate_id">
+                    <option value="0">请选择</option>
+                    @foreach($cateInfo as $k =>$v)
+                    <option value="{{$v->cate_id}}">{{$v->cate_name}}</option>
+                    @endforeach
+                </select><br>
     <input type="submit" value="点击添加商品"><br>
 </form>
 

@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::prefix("/index")->group(function (){
+   Route::get('/login','Index\LoginController@login');
+
+   Route::get('/reg','Index\LoginController@reg');
+});

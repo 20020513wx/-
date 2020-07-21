@@ -23,28 +23,7 @@
 	<!-- end side nav right-->
 
 	<!-- navbar bottom -->
-	<div class="navbar-bottom">
-		<div class="row">
-			<div class="col s2">
-				<a href="index.html"><i class="fa fa-home"></i></a>
-			</div>
-			<div class="col s2">
-				<a href="wishlist.html"><i class="fa fa-heart"></i></a>
-			</div>
-			<div class="col s4">
-				<div class="bar-center">
-					<a href="#animatedModal" id="cart-menu"><i class="fa fa-shopping-basket"></i></a>
-					<span>2</span>
-				</div>
-			</div>
-			<div class="col s2">
-				<a href="contact.html"><i class="fa fa-envelope-o"></i></a>
-			</div>
-			<div class="col s2">
-				<a href="#animatedModal2" id="nav-menu"><i class="fa fa-bars"></i></a>
-			</div>
-		</div>
-	</div>
+    @include('layout.bottom');
 	<!-- end navbar bottom -->
 
 	<!-- menu -->
@@ -120,7 +99,7 @@
 				</div>
 				<div class="row">
 					<div class="col s4">
-						<a href="blog.html" class="button-link">	
+						<a href="blog.html" class="button-link">
 							<div class="menu-link">
 								<div class="icon">
 									<i class="fa fa-bold"></i>
@@ -130,7 +109,7 @@
 						</a>
 					</div>
 					<div class="col s4">
-						<a href="blog-single.html" class="button-link">	
+						<a href="blog-single.html" class="button-link">
 							<div class="menu-link">
 								<div class="icon">
 									<i class="fa fa-file-text-o"></i>
@@ -330,7 +309,7 @@
 		</div>
 	</div>
 	<!-- end cart menu -->
-	
+
 	<!-- shop single -->
 	<div class="pages section">
 		<div class="container">
@@ -356,7 +335,7 @@
 							</div>
 						</div>
 					</div>
-				</div>	
+				</div>
 				<div class="review-form">
 					<div class="review-head">
 						<h5>Post Review in Below</h5>
@@ -389,9 +368,9 @@
 	<!-- loader -->
 	<div id="fakeLoader"></div>
 	<!-- end loader -->
-	
+
 	<!-- footer -->
 	@include('layout.foot');
 	<!-- end footer -->
-	
+
 	@endsection

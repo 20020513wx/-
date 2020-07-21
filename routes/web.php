@@ -11,8 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::prefix('index')->group(function(){
+	Route::get('/goodsindex','Index\GoodsController@goodsindex');
+	Route::get('/goodslists','Index\GoodsController@goodslists');
+});
+
+//购物车
+Route::prefix("/index")->group(function(){
+    Route::get('index/cart','Index\CartController@cart');
 });
 //个人中心
 

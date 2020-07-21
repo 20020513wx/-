@@ -8,8 +8,13 @@ $(function(){
 
 	});
 
+<<<<<<< HEAD
 	$("#cart-menu").animatedModal();
 	
+=======
+	$("#index-menu").animatedModal();
+
+>>>>>>> cf0722f1263bbbcca67ee2f7a36371ef55bf0ac8
 	$("#nav-menu").animatedModal({
 		modalTarget: 'animatedModal2'
 	});
@@ -48,7 +53,11 @@ $(function(){
 
 	// loader
     $("#fakeLoader").fakeLoader({
+<<<<<<< HEAD
       
+=======
+
+>>>>>>> cf0722f1263bbbcca67ee2f7a36371ef55bf0ac8
       zIndex: 999,
       spinner: 'spinner4',
       bgColor: '#191919'
@@ -60,5 +69,10 @@ $(function(){
 	});
 
     $('select').material_select();
+<<<<<<< HEAD
     
 });
+=======
+
+});
+>>>>>>> cf0722f1263bbbcca67ee2f7a36371ef55bf0ac8

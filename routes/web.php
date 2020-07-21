@@ -11,11 +11,6 @@
 |
 */
 
-Route::get('/','Index\LoginController@login');
-Route::get('loginDo','Index\LoginController@loginDo');
-Route::get('reg','Index\LoginController@reg');
-Route::get('regDo','Index\LoginController@regDo');
-
 Route::prefix('index')->group(function(){
 	Route::get('/goodsindex','Index\GoodsController@goodsindex');
 	Route::get('/goodslists','Index\GoodsController@goodslists');

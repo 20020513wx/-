@@ -10,7 +10,7 @@
 	<meta name="HandheldFriendly" content="True">
 
 	<link rel="stylesheet" href="/static/css/materialize.css">
-	<link rel="stylesheet" href="/staticfont-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/static/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/static/css/normalize.css">
 	<link rel="stylesheet" href="/static/css/owl.carousel.css">
 	<link rel="stylesheet" href="/static/css/owl.theme.css">
@@ -18,8 +18,8 @@
 	<link rel="stylesheet" href="/static/css/fakeLoader.css">
 	<link rel="stylesheet" href="/static/css/animate.css">
 	<link rel="stylesheet" href="/static/css/style.css">
-	
-	<link rel="shortcut icon" href="img/favicon.png">
+
+	<link rel="shortcut icon" href="/static/img/favicon.png">
 
 </head>
 <body>

@@ -17,6 +17,9 @@
         </ul>
     </div>
     <!-- end side nav right-->
+
+    @include('layout.bottom');
+
     <div class="cart section">
         <div class="container">
             <div class="pages-head">

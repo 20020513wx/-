@@ -23,7 +23,6 @@ Route::prefix("/admin")->group(function (){
     Route::get("/login","Admin\LoginController@login");     //登录
     Route::post("/logindo","Admin\LoginController@logindo");   // 登录执行
 });
-
 //前台用户
 Route::prefix("index")->group(function (){
    //登录
@@ -31,15 +30,10 @@ Route::prefix("index")->group(function (){
     //注册
    Route::get('/reg','Index\LoginController@reg');
 });
-
-
-
 //购物车
 Route::prefix("/index")->group(function(){
     Route::get('/index/cart','Index\CartController@cart');
 });
-
-
 //后台商品列表
 Route::prefix("/admin")->middleware("islogin")->group(function(){
     //商品列表
@@ -50,8 +44,6 @@ Route::prefix("/admin")->middleware("islogin")->group(function(){
     Route::get('/goodsedit/{id}','Admin\GoodsController@edit');
     Route::post('/goodsupdate/{id}','Admin\GoodsController@update');
 });
-
-
 //后台商品分类
 Route::prefix("/admin")->middleware("islogin")->group(function(){
    Route::get('/category_index','Admin\CategoryController@index');   //展示
@@ -63,9 +55,6 @@ Route::prefix("/admin")->middleware("islogin")->group(function(){
     Route::get('/category_edit/{id}','Admin\CategoryController@edit');//修改视图
     Route::post('/category_update/{id}','Admin\CategoryController@update');//修改视图
 });
-
-
-
 //后台用户
 Route::prefix("/admin")->group(function(){
     Route::get('/userindex','Admin\UserController@userindex');//用户展示

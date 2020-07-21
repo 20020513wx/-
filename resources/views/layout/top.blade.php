@@ -11,17 +11,17 @@
     <meta name="HandheldFriendly" content="True">
 
 
-    <link rel="stylesheet" href="/status/css/materialize.css">
-    <link rel="stylesheet" href="/status/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/status/css/normalize.css">
-    <link rel="stylesheet" href="/status/css/owl.carousel.css">
-    <link rel="stylesheet" href="/status/css/owl.theme.css">
-    <link rel="stylesheet" href="/status/css/owl.transitions.css">
-    <link rel="stylesheet" href="/status/css/fakeLoader.css">
-    <link rel="stylesheet" href="/status/css/animate.css">
-    <link rel="stylesheet" href="/status/css/style.css">
+    <link rel="stylesheet" href="/static/css/materialize.css">
+    <link rel="stylesheet" href="/static/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/css/normalize.css">
+    <link rel="stylesheet" href="/static/css/owl.carousel.css">
+    <link rel="stylesheet" href="/static/css/owl.theme.css">
+    <link rel="stylesheet" href="/static/css/owl.transitions.css">
+    <link rel="stylesheet" href="/static/css/fakeLoader.css">
+    <link rel="stylesheet" href="/static/css/animate.css">
+    <link rel="stylesheet" href="/static/css/style.css">
 
-    <link rel="shortcut icon" href="/status/img/favicon.png">
+    <link rel="shortcut icon" href="/static/img/favicon.png">
 
 
 
@@ -37,7 +37,7 @@
 <div class="side-nav-panel-right">
     <ul id="slide-out-right" class="side-nav side-nav-panel collapsible">
         <li class="profil">
-            <img src="img/profile.jpg" alt="">
+            <img src="/static/img/profile.jpg" alt="">
             <h2>John Doe</h2>
         </li>
         <li><a href="setting.html"><i class="fa fa-cog"></i>Settings</a></li>
@@ -284,7 +284,7 @@
                         <div class="row">
                             <div class="col s5">
 
-                                <img src="/status/img/cart-menu1.png" alt="">
+                                <img src="/static/img/cart-menu1.png" alt="">
 
                                 <img src="/static/img/cart-menu1.png" alt="">
 
@@ -323,7 +323,7 @@
                         <div class="row">
                             <div class="col s5">
 
-                                <img src="/status/img/cart-menu2.png" alt="">
+                                <img src="/static/img/cart-menu2.png" alt="">
 
                                 <img src="/static/img/cart-menu2.png" alt="">
 
@@ -401,12 +401,12 @@
 
 
 <!-- scripts -->
-<script src="/status/js/jquery.min.js"></script>
-<script src="/status/js/materialize.min.js"></script>
-<script src="/status/js/owl.carousel.min.js"></script>
-<script src="/status/js/fakeLoader.min.js"></script>
-<script src="/status/js/animatedModal.min.js"></script>
-<script src="/status/js/main.js"></script>
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/materialize.min.js"></script>
+<script src="/static/js/owl.carousel.min.js"></script>
+<script src="/static/js/fakeLoader.min.js"></script>
+<script src="/static/js/animatedModal.min.js"></script>
+<script src="/static/js/main.js"></script>
 @yield('content')
 </body>
 </html>

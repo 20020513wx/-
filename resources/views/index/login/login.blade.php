@@ -5,8 +5,9 @@
 <!-- side nav right-->
 <div class="side-nav-panel-right">
     <ul id="slide-out-right" class="side-nav side-nav-panel collapsible">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <li class="profil">
-            <img src="/status/img/profile.jpg" alt="">
+            <img src="/static/img/profile.jpg" alt="">
             <h2>John Doe</h2>
         </li>
         <li><a href="setting.html"><i class="fa fa-cog"></i>Settings</a></li>
@@ -79,6 +80,11 @@
         var _this=$(this);
         var user_name=$("#user_name").val();
         var user_pwd=$("#user_pwd").val();
-        alert(user_name);
+        if(user_name ==""){
+            alert('用户名不能为空');
+        }
+        if(user_pwd ==""){
+            alert('密码不能为空');
+        }
     });
 </script>

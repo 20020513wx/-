@@ -20,3 +20,8 @@ Route::prefix('index')->group(function(){
 	Route::get('/goodsindex','Index\GoodsController@goodsindex');
 	Route::get('/goodslists','Index\GoodsController@goodslists');
 });
+
+//测试
+Route::prefix("/index")->group(function(){
+    Route::get('/cart','Cart\CartController@cart');
+});

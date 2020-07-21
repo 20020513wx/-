@@ -13,7 +13,7 @@
                             <h5>Image</h5>
                         </div>
                         <div class="col s7">
-                            <img src="/status/img/cart1.png" alt="">
+                            <img src="/static/img/cart1.png" alt="">
                         </div>
                     </div>
                     <div class="row">
@@ -56,7 +56,7 @@
                             <h5>Image</h5>
                         </div>
                         <div class="col s7">
-                            <img src="/status/img/cart2.png" alt="">
+                            <img src="/static/img/cart2.png" alt="">
                         </div>
                     </div>
                     <div class="row">

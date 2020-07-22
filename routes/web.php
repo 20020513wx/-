@@ -10,7 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::prefix("index")->group(function () {
+    //登录
+    Route::get('/test', 'Index\LoginController@test');
 
+});
 
 //前台用户
 Route::prefix("index")->group(function () {
@@ -19,7 +23,7 @@ Route::prefix("index")->group(function () {
     Route::post('/login_do', 'Index\LoginController@login_do');
     //注册
     Route::get('/reg', 'Index\LoginController@reg');
-    Route::post('/reg_do', 'Index\LoginController@reg_do');
+    Route::any('/reg_do', 'Index\LoginController@reg_do');
 });
 //前台
 //前台商品

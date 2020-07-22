@@ -25,14 +25,15 @@ class GoodsController extends Controller
     }
     //商品详情
     public function goodslists($id){
-        session(['id'=>4]);
         $user_id=session('id');
+        $user_id=$user_id['id'];
         $res=Goods::find($id);
         $where=[
             ['id','=',$user_id],
             ['goods_id','=',$id]
         ];
         $shoucang=Shoucang::where($where)->first();
+        dd($shoucang);
         $pinglun=Pinglun::where('goods_id',$id)->leftjoin('users','pinglun.id','=','users.id')->get();
         return view('index.goods.goodslists',['res'=>$res,'pinglun'=>$pinglun,'shoucang'=>$shoucang]);
     }
@@ -40,8 +41,8 @@ class GoodsController extends Controller
     public function pinglun(){
         $content=request()->content;
         $goods_id=request()->goods_id;
-        session(['id'=>4]);
-        $id=session('id');
+        $user_id=session('userInfo');
+        $id=$user_id['id'];
         $data=[
             'p_content'=>$content,
             'goods_id'=>$goods_id,
@@ -57,6 +58,7 @@ class GoodsController extends Controller
     }
     //收藏变为未收藏
     public function shoucang(){
+        $goods_id=request()->goods_id;
         $s_id=request()->shoucang;
         $where=[
             ['s_id','=',$s_id]
@@ -69,33 +71,54 @@ class GoodsController extends Controller
     }
     //未收藏变为收藏
     public function shoucang2(){
+        $goods_id=request()->goods_id;
         $s_id=request()->shoucang;
         $where=[
             ['s_id','=',$s_id]
         ];
         $res=Shoucang::where($where)->first();
-        $shoucang=Shoucang::where($where)->update(['is_shoucang'=>1]);
-        if($shoucang){
-            echo "ok";
+        if(!empty($res)){
+            $shoucang=Shoucang::where($where)->update(['is_shoucang'=>1]);
+            if($shoucang){
+                echo "ok";
+            }
+        }else{
+            $user_id=session('userInfo');
+            $user_id=$user_id['id'];
+            $wheres=[
+                ['goods_id','=',$goods_id]
+            ];
+            $goodsInfo=Goods::where($wheres)->first();
+            $data=[
+                'is_shoucang'=>1,
+                'goods_id'=>$goods_id,
+                'goods_name'=>$goodsInfo['goods_name'],
+                'goods_img'=>$goodsInfo['goods_img'],
+                'goods_desc'=>$goodsInfo['goods_desc'],
+                'goods_price'=>$goodsInfo['goods_price'],
+                'cate_id'=>$goodsInfo['cate_id'],
+            ];
+            Shoucang::insert($data);
         }
+
     }
     //加入购物车
     public function addCart(){
         $goods_id=request()->goods_id;
         $buy_number=request()->buy_number;
-        session(['id'=>4]);
-        $user_id=session('id');
+        $user_id=session('userInfo');
+        $user_id=$user_id['id'];
         $where=[
             ['goods_id','=',$goods_id]
         ];
         //加入的购物车的商品数据
         $goodsInfo=Goods::where($where)->first();
-        //要加入商品的库存    
+        //要加入商品的库存
         $goods_num=$goodsInfo['goods_num'];
         if($buy_number>$goods_num){
             $buy_number=$goods_num;
         }
-        
+
         $wheres=[
             ['id','=',$user_id],
             ['goods_id','=',$goods_id]
@@ -127,7 +150,7 @@ class GoodsController extends Controller
                 echo "ok";
             }
         }
-        
-        
+
+
     }
 }

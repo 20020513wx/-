@@ -340,7 +340,7 @@
 						</div>
 					</div>
 				</div>
-				
+
 				<div class="review-form">
 					<div class="review-head">
 						<h5>在下面发布评论</h5>
@@ -376,7 +376,7 @@
 			$('.aaaaa').click(function(){
 				var content=$('#textarea1').val();
 				var goods_id=$('#goods_id').attr('goods_id')
-				
+
 				$.ajax({
 					url:"{{url('index/pinglun')}}",
 					data:{content:content,goods_id:goods_id},
@@ -393,9 +393,11 @@
 			//收藏变为未收藏
 			$('#shoucang').click(function(){
 				var shoucang=$('#shoucang').attr('shoucang')
+                alert(shoucang);
+                var goods_id=$('#goods_id').attr('goods_id')
 				$.ajax({
 					url:"{{url('index/shoucang')}}",
-					data:{shoucang:shoucang},
+					data:{shoucang:shoucang,goods_id:goods_id},
 					type:"post",
 					success:function(res){
 						if(res=="ok"){
@@ -407,9 +409,10 @@
 			//未收藏变为收藏
 			$('#shoucang2').click(function(){
 				var shoucang=$('#shoucang').attr('shoucang')
+                var goods_id=$('#goods_id').attr('goods_id')
 				$.ajax({
 					url:"{{url('index/shoucang2')}}",
-					data:{shoucang:shoucang},
+					data:{shoucang:shoucang,goods_id:goods_id},
 					type:"post",
 					success:function(res){
 						if(res=="ok"){
@@ -431,7 +434,7 @@
 							if(window.confirm("加入购物车成功！点击确定进入购物车")){
 								location.href="/index/cart/";
 							}
-							
+
 						}
 					}
 				});

@@ -75,7 +75,7 @@
             type:"POST",
             data:{password:password,name:name},
             success:function(res) {
-                console.log(res);
+                //console.log(res);
                 if(res.err_code=="006"){
                     alert("登录成功");
                     window.location.href="{{url('index/goodsindex')}}";

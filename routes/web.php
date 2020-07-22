@@ -13,15 +13,32 @@
 
 
 //前台用户
-Route::prefix("index")->group(function (){
-   //登录
-    Route::get('/login','Index\LoginController@login');
-    Route::post('/login_do','Index\LoginController@login_do');
+Route::prefix("index")->group(function () {
+    //登录
+    Route::get('/login', 'Index\LoginController@login');
+    Route::post('/login_do', 'Index\LoginController@login_do');
     //注册
-    Route::get('/reg','Index\LoginController@reg');
-    Route::post('/reg_do','Index\LoginController@reg_do');
+    Route::get('/reg', 'Index\LoginController@reg');
+    Route::post('/reg_do', 'Index\LoginController@reg_do');
 });
-
+//前台
+//前台商品
+Route::prefix('index')->group(function(){
+    //首页
+    Route::get('/goodsindex','Index\GoodsController@goodsindex');
+    //商品列表
+    Route::get('/goodsshop','Index\GoodsController@goodsshop');
+    //详情页
+    Route::get('/goodslists/{id}','Index\GoodsController@goodslists');
+    //评论
+    Route::any('/pinglun','Index\GoodsController@pinglun');
+    //收藏变为未收藏
+    Route::any('/shoucang','Index\GoodsController@shoucang');
+    //未收藏变为收藏
+    Route::any('/shoucang2','Index\GoodsController@shoucang2');
+    //加入购物车
+    Route::any('/addCart','Index\GoodsController@addCart');
+});
 
 //后台管理员
 Route::prefix("/admin")->group(function (){
@@ -30,6 +47,7 @@ Route::prefix("/admin")->group(function (){
     Route::get("/login","Admin\LoginController@login");     //登录
     Route::post("/logindo","Admin\LoginController@logindo");   // 登录执行
 });
+
 
 //后台商品列表
 Route::prefix("/admin")->middleware("islogin")->group(function(){
@@ -52,17 +70,9 @@ Route::prefix("/admin")->middleware("islogin")->group(function(){
     Route::post('/category_update/{id}','Admin\CategoryController@update');//修改视图
 });
 //后台用户
-Route::prefix("/admin")->group(function(){
+Route::prefix("/admin")->middleware("islogin")->group(function(){
     Route::get('/userindex','Admin\UserController@userindex');//用户展示
     Route::get('delete/{id}','Admin\UserController@delete');//删除
     Route::get('edit/{id}','Admin\UserController@edit');//编辑展示
     Route::post('update/{id}','Admin\UserController@update');//编辑执行
 });
-
-
-
-
-
-
-
-

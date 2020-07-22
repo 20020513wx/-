@@ -9,6 +9,7 @@ use App\Model\Pinglun;
 use App\Model\UserModel;
 use App\Model\Category;
 use App\Model\Shoucang;
+use App\Model\Cart;
 class GoodsController extends Controller
 {
     //主页
@@ -82,6 +83,51 @@ class GoodsController extends Controller
     public function addCart(){
         $goods_id=request()->goods_id;
         $buy_number=request()->buy_number;
+        session(['id'=>4]);
+        $user_id=session('id');
+        $where=[
+            ['goods_id','=',$goods_id]
+        ];
+        //加入的购物车的商品数据
+        $goodsInfo=Goods::where($where)->first();
+        //要加入商品的库存    
+        $goods_num=$goodsInfo['goods_num'];
+        if($buy_number>$goods_num){
+            $buy_number=$goods_num;
+        }
+        
+        $wheres=[
+            ['id','=',$user_id],
+            ['goods_id','=',$goods_id]
+        ];
+        $cartInfo=Cart::where($wheres)->first();
+        if(!empty($cartInfo)){
+            //累加
+            $num=$buy_number+$cartInfo['buy_number'];
+            if($num>$goods_num){
+                $num=$goods_num;
+            }
+            $cart=Cart::where($wheres)->update(['buy_number'=>$num,'addtime'=>time()]);
+            if($cart){
+                echo "ok";
+            }
+        }else{
+            //添加
+            $data=[
+                'goods_name'=>$goodsInfo['goods_name'],
+                'goods_id'=>$goodsInfo['goods_id'],
+                'buy_number'=>$buy_number,
+                'id'=>$user_id,
+                'goods_img'=>$goodsInfo['goods_img'],
+                'goods_price'=>$goodsInfo['goods_price'],
+                'addtime'=>time()
+            ];
+            $res=Cart::insert($data);
+            if($res){
+                echo "ok";
+            }
+        }
+        
         
     }
 }

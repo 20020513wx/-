@@ -427,7 +427,12 @@
 					data:{goods_id:goods_id,buy_number:buy_number},
 					type:"post",
 					success:function(res){
-						console.log(res);
+						if(res=="ok"){
+							if(window.confirm("加入购物车成功！点击确定进入购物车")){
+								location.href="/index/cart/";
+							}
+							
+						}
 					}
 				});
 			})

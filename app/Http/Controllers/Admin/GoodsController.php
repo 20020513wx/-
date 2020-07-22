@@ -58,7 +58,7 @@ class GoodsController extends Controller
                 //正确就接收文件
                 $file=request()->$filename;
                 //保存进入目录
-                $path=$file->store('uploads');
+                $path=$file->store('');
                 return $path;
             }
             exit('文件上传有误');

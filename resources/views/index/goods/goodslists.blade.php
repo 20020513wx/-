@@ -358,7 +358,7 @@
 	<!-- end loader -->
 
 	<!-- footer -->
-	@include('layout.foot');
+	@include('layout.foot')
 	<!-- end footer -->
 
 	@endsection

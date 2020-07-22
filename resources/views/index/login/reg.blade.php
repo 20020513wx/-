@@ -1,5 +1,8 @@
 
-@extends("layout.top")
+@extends("layout.bottom")
+@extends("layout.navright")
+@extends("layout.shop")
+
 @section("title","注册")
 @section('content')
 
@@ -41,7 +44,7 @@
 <div id="fakeLoader"></div>
 <!-- end loader -->
 
-<!-- footer -->
+
 <div class="footer">
     <div class="container">
         <div class="about-us-foot">
@@ -60,31 +63,53 @@
         </div>
     </div>
 </div>
-<!-- end footer -->
 
 @endsection
-<script src="/jquery.js"></script>
+<script src="/static/jquery.js"></script>
 <script>
     $(document).on("click","#register",function () {
         var _this=$(this);
         var user_name=$("#user_name").val();
         var user_pwd=$("#user_pwd").val();
         var user_email=$("#user_email").val();
-        var pattern = /^[\u4E00-\u9FA5]{1,6}$/;
-        if(!pattern.test(user_name)) {
-            alert("用户名由中文组成 ,并且长度1-6位");
-            return false;
-        }
+
+        //验证名称由中文组成
+        //var pattern = /^[\u4E00-\u9FA5]{1,6}$/;
+        // if(!pattern.test(user_name)) {
+        //     alert("用户名由中文组成 ,并且长度1-6位");
+        //     return false;
+        // }
+
+        //验证密码长度
         var pwd_test=/^[a-zA-Z0-9]{6,10}$/;
         if(!pwd_test.test(user_pwd)){
             alert("密码长度由6-12位 数字 大写字母 小写字母组成，不能有特殊符号");
             return false;
         }
-        var email_test= /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
-        if (!email_test.test($("#email").val())) {
+
+        //验证邮箱格式
+        var email_test= /^([\.a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/;
+        if (!email_test.test(user_email) ){
             alert("请输入正确的邮箱格式");
             return false;
         }
+
+        //ajax把数据传到后台
+        $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
+
+        $.ajax({
+           url:"{{url("/index/reg_do")}}",
+            type:"POST",
+            data:{user_name:user_name,user_email:user_email,user_pwd:user_pwd},
+            success:function(res) {
+               console.log(res);
+                // if(res.code==0){
+                //     alert("登录成功");
+                // }else{
+                //     alert("登录失败");
+                // }
+            }
+        });
         console.log(123);
     });
 </script>

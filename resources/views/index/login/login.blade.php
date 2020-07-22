@@ -1,27 +1,9 @@
+@extends("layout.bottom")
+@extends("layout.navright")
+@extends("layout.shop")
 
-@extends("layout.top")
 @section("title","登录")
 @section('content')
-<!-- side nav right-->
-<div class="side-nav-panel-right">
-    <ul id="slide-out-right" class="side-nav side-nav-panel collapsible">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-        <li class="profil">
-            <img src="/static/img/profile.jpg" alt="">
-            <h2>John Doe</h2>
-        </li>
-        <li><a href="setting.html"><i class="fa fa-cog"></i>Settings</a></li>
-        <li><a href="about-us.html"><i class="fa fa-user"></i>About Us</a></li>
-        <li><a href="contact.html"><i class="fa fa-envelope-o"></i>Contact Us</a></li>
-        <li><a href="login.html"><i class="fa fa-sign-in"></i>Login</a></li>
-        <li><a href="register.html"><i class="fa fa-user-plus"></i>Register</a></li>
-    </ul>
-</div>
-<!-- end side nav right-->
-
-
-
-
 
 
 <!-- login -->
@@ -52,7 +34,6 @@
 <div id="fakeLoader"></div>
 <!-- end loader -->
 
-<!-- footer -->
 <div class="footer">
     <div class="container">
         <div class="about-us-foot">
@@ -71,10 +52,10 @@
         </div>
     </div>
 </div>
-<!-- end footer -->
+
 
 @endsection
-<script src="/jquery.js"></script>
+<script src="/static/jquery.js"></script>
 <script>
     $(document).on("click","#login",function () {
         var _this=$(this);
@@ -82,9 +63,11 @@
         var user_pwd=$("#user_pwd").val();
         if(user_name ==""){
             alert('用户名不能为空');
+            return false;
         }
         if(user_pwd ==""){
             alert('密码不能为空');
+            return false;
         }
     });
 </script>

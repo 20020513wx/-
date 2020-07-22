@@ -63,5 +63,5 @@ class LoginController extends Controller
             return redirect("admin/login")->with("msg","账号或密码有误");
         }
     }
-  
+
 }

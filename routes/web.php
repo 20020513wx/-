@@ -10,11 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-//前台
-Route::prefix('index')->group(function(){
-    Route::get('/goodsindex','Index\GoodsController@goodsindex');
-    Route::get('/goodslists','Index\GoodsController@goodslists');
-});
+
 
 //前台用户
 Route::prefix("index")->group(function (){
@@ -25,14 +21,6 @@ Route::prefix("index")->group(function (){
     Route::get('/reg','Index\LoginController@reg');
     Route::post('/reg_do','Index\LoginController@reg_do');
 });
-
-//购物车
-Route::prefix("/index")->group(function(){
-    Route::get('/index/cart','Index\CartController@cart');
-});
-
-
-
 
 
 //后台管理员

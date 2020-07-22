@@ -23,13 +23,13 @@
             <div class="row">
                 <form class="col s12">
                     <div class="input-field">
-                        <input type="text" class="validate" placeholder="NAME" required id="user_name">
+                        <input type="text" class="validate" placeholder="NAME" required id="name">
                     </div>
                     <div class="input-field">
-                        <input type="email" placeholder="EMAIL" class="validate" required id="user_email">
+                        <input type="email" placeholder="EMAIL" class="validate" required id="email">
                     </div>
                     <div class="input-field">
-                        <input type="password" placeholder="PASSWORD" class="validate" required id="user_pwd">
+                        <input type="password" placeholder="PASSWORD" class="validate" required id="password">
                     </div>
                     <div class="btn button-default" id="register">REGISTER</div>
                 </form>
@@ -69,28 +69,28 @@
 <script>
     $(document).on("click","#register",function () {
         var _this=$(this);
-        var user_name=$("#user_name").val();
-        var user_pwd=$("#user_pwd").val();
-        var user_email=$("#user_email").val();
-
+        var name=$("#name").val();
+        var password=$("#password").val();
+        var email=$("#email").val();
+        //alert(password);
         //验证名称由中文组成
-        //var pattern = /^[\u4E00-\u9FA5]{1,6}$/;
-        // if(!pattern.test(user_name)) {
-        //     alert("用户名由中文组成 ,并且长度1-6位");
-        //     return false;
-        // }
+        var pattern = /^[\u4E00-\u9FA5]{1,6}$/;
+        if(!pattern.test(name)) {
+            alert("用户名由中文组成 ,并且长度1-6位");
+            return false;
+        }
 
         //验证密码长度
-        var pwd_test=/^[a-zA-Z0-9]{6,10}$/;
-        if(!pwd_test.test(user_pwd)){
-            alert("密码长度由6-12位 数字 大写字母 小写字母组成，不能有特殊符号");
+        var pwd_test=/^[a-zA-Z0-9]{6,15}$/;
+        if(!pwd_test.test(password)){
+            alert("密码长度由6-15位 数字 大写字母 小写字母组成，不能有特殊符号");
             return false;
         }
 
         //验证邮箱格式
         var email_test= /^([\.a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/;
-        if (!email_test.test(user_email) ){
-            alert("请输入正确的邮箱格式");
+        if (!email_test.test(email) ){
+            alert("请输入正确的邮箱格式123");
             return false;
         }
 
@@ -100,16 +100,18 @@
         $.ajax({
            url:"{{url("/index/reg_do")}}",
             type:"POST",
-            data:{user_name:user_name,user_email:user_email,user_pwd:user_pwd},
+            data:{name:name,email:email,password:password},
             success:function(res) {
-               console.log(res);
-                // if(res.code==0){
-                //     alert("登录成功");
-                // }else{
-                //     alert("登录失败");
-                // }
+
+                if(res.err_code=="000"){
+                    alert("注册成功");
+                    window.location.href="{{url('/index/login')}}";
+                }else{
+                    alert("注册失败");
+                    return false;
+                }
             }
         });
-        console.log(123);
+
     });
 </script>

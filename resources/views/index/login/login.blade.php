@@ -5,7 +5,7 @@
 @section("title","登录")
 @section('content')
 
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 <!-- login -->
 <div class="pages section">
     <div class="container">
@@ -16,13 +16,13 @@
             <div class="row">
                 <form class="col s12">
                     <div class="input-field">
-                        <input type="text" class="validate" placeholder="USERNAME" required id="user_name">
+                        <input type="text" class="validate" placeholder="USERNAME" required id="name">
                     </div>
                     <div class="input-field">
-                        <input type="password" class="validate" placeholder="PASSWORD" required id="user_pwd">
+                        <input type="password" class="validate" placeholder="PASSWORD" required id="password">
                     </div>
                     <a href=""><h6>Forgot Password ?</h6></a>
-                    <a href="" class="btn button-default"id="login">LOGIN</a>
+                    <div class="btn button-default" id="login">LOGIN</div>
                 </form>
             </div>
         </div>
@@ -59,15 +59,31 @@
 <script>
     $(document).on("click","#login",function () {
         var _this=$(this);
-        var user_name=$("#user_name").val();
-        var user_pwd=$("#user_pwd").val();
-        if(user_name ==""){
+        var name=$("#name").val();
+        var password=$("#password").val();
+        if(name ==""){
             alert('用户名不能为空');
             return false;
         }
-        if(user_pwd ==""){
+        if(password ==""){
             alert('密码不能为空');
             return false;
         }
+        $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
+        $.ajax({
+            url:"{{url("/index/login_do")}}",
+            type:"POST",
+            data:{password:password,name:name},
+            success:function(res) {
+                console.log(res);
+                if(res.err_code=="006"){
+                    alert("登录成功");
+                    window.location.href="{{url('index/goodsindex')}}";
+                }else{
+                    alert("登录失败");
+                    return false;
+                }
+            }
+        });
     });
 </script>

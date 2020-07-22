@@ -36,6 +36,7 @@ Route::prefix("/admin")->group(function (){
     Route::get("/login","Admin\LoginController@login");     //登录
     Route::post("/logindo","Admin\LoginController@logindo");   // 登录执行
 });
+
 //后台商品列表
 Route::prefix("/admin")->middleware("islogin")->group(function(){
     //商品列表

@@ -82,7 +82,7 @@ class LoginController extends Controller
 
     }
     public function test(){
-        $se=session('userInfo');
+        $se=session('id');
         dd($se);
     }
 }

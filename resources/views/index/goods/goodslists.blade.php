@@ -393,7 +393,6 @@
 			//收藏变为未收藏
 			$('#shoucang').click(function(){
 				var shoucang=$('#shoucang').attr('shoucang')
-                alert(shoucang);
                 var goods_id=$('#goods_id').attr('goods_id')
 				$.ajax({
 					url:"{{url('index/shoucang')}}",

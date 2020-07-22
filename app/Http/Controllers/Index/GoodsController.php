@@ -26,27 +26,43 @@ class GoodsController extends Controller
     //商品详情
     public function goodslists($id){
         $user_id=session('id');
-        $user_id=$user_id['id'];
         $res=Goods::find($id);
         $where=[
             ['id','=',$user_id],
             ['goods_id','=',$id]
         ];
         $shoucang=Shoucang::where($where)->first();
-        dd($shoucang);
+        $wheres=[
+            ['goods_id','=',$id]
+        ];
+        $goodsInfo=Goods::where($wheres)->first();
+        
+        if(empty($shoucang)){
+            $data=[
+                'is_shoucang'=>1,
+                'goods_id'=>$id,
+                'goods_name'=>$goodsInfo['goods_name'],
+                'goods_img'=>$goodsInfo['goods_img'],
+                'goods_desc'=>$goodsInfo['goods_desc'],
+                'goods_price'=>$goodsInfo['goods_price'],
+                'cate_id'=>$goodsInfo['cate_id'],
+                'id'=>$user_id
+            ];
+            $aec=Shoucang::insert($data);
+        }
         $pinglun=Pinglun::where('goods_id',$id)->leftjoin('users','pinglun.id','=','users.id')->get();
         return view('index.goods.goodslists',['res'=>$res,'pinglun'=>$pinglun,'shoucang'=>$shoucang]);
+        
     }
     //评论
     public function pinglun(){
         $content=request()->content;
         $goods_id=request()->goods_id;
-        $user_id=session('userInfo');
-        $id=$user_id['id'];
+        $user_id=session('id');
         $data=[
             'p_content'=>$content,
             'goods_id'=>$goods_id,
-            'id'=>$id,
+            'id'=>$user_id,
             'p_time'=>time()
         ];
         $res=Pinglun::insert($data);
@@ -82,23 +98,6 @@ class GoodsController extends Controller
             if($shoucang){
                 echo "ok";
             }
-        }else{
-            $user_id=session('userInfo');
-            $user_id=$user_id['id'];
-            $wheres=[
-                ['goods_id','=',$goods_id]
-            ];
-            $goodsInfo=Goods::where($wheres)->first();
-            $data=[
-                'is_shoucang'=>1,
-                'goods_id'=>$goods_id,
-                'goods_name'=>$goodsInfo['goods_name'],
-                'goods_img'=>$goodsInfo['goods_img'],
-                'goods_desc'=>$goodsInfo['goods_desc'],
-                'goods_price'=>$goodsInfo['goods_price'],
-                'cate_id'=>$goodsInfo['cate_id'],
-            ];
-            Shoucang::insert($data);
         }
 
     }
@@ -106,8 +105,7 @@ class GoodsController extends Controller
     public function addCart(){
         $goods_id=request()->goods_id;
         $buy_number=request()->buy_number;
-        $user_id=session('userInfo');
-        $user_id=$user_id['id'];
+        $user_id=session('id');
         $where=[
             ['goods_id','=',$goods_id]
         ];

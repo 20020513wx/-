@@ -13,8 +13,20 @@
 //前台
 //前台商品
 Route::prefix('index')->group(function(){
+    //首页
     Route::get('/goodsindex','Index\GoodsController@goodsindex');
-    Route::get('/goodslists','Index\GoodsController@goodslists');
+    //商品列表
+    Route::get('/goodsshop','Index\GoodsController@goodsshop');
+    //详情页
+    Route::get('/goodslists/{id}','Index\GoodsController@goodslists');
+    //评论
+    Route::any('/pinglun','Index\GoodsController@pinglun');
+    //收藏变为未收藏
+    Route::any('/shoucang','Index\GoodsController@shoucang');
+    //未收藏变为收藏
+    Route::any('/shoucang2','Index\GoodsController@shoucang2');
+    //加入购物车
+    Route::any('/addCart','Index\GoodsController@addCart');
 });
 //前台用户
 Route::prefix("index")->group(function (){

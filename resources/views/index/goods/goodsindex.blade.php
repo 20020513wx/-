@@ -1,5 +1,5 @@
 @extends('layout.shop')
-@section('title','商品列表')
+@section('title','主页')
 @section('content')
 
 	<!-- navbar top -->
@@ -212,7 +212,7 @@
 				<div class="caption slider-content  center-align">
 					<h2>WELCOME TO MSTORE</h2>
 					<h4>Lorem ipsum dolor sit amet.</h4>
-					<a href="" class="btn button-default">SHOP NOW</a>
+					<a href="{{url('index/goodsshop')}}" class="btn button-default">SHOP NOW</a>
 				</div>
 			</li>
 			<li>
@@ -220,7 +220,7 @@
 				<div class="caption slider-content center-align">
 					<h2>JACKETS BUSINESS</h2>
 					<h4>Lorem ipsum dolor sit amet.</h4>
-					<a href="" class="btn button-default">SHOP NOW</a>
+					<a href="{{url('index/goodsshop')}}" class="btn button-default">SHOP NOW</a>
 				</div>
 			</li>
 			<li>
@@ -228,7 +228,7 @@
 				<div class="caption slider-content center-align">
 					<h2>FASHION SHOP</h2>
 					<h4>Lorem ipsum dolor sit amet.</h4>
-					<a href="" class="btn button-default">SHOP NOW</a>
+					<a href="{{url('index/goodsshop')}}" class="btn button-default">SHOP NOW</a>
 				</div>
 			</li>
 		</ul>
@@ -260,7 +260,7 @@
 				@foreach($res as $k=>$v)
 				<div class="col s6">
 					<div class="content">
-						<img src="/storage/{{$v->goods_img}}" alt="">
+						<a href="{{url('index/goodslists/'.$v->goods_id)}}"><img src="/storage/{{$v->goods_img}}" alt=""></a>
 						<h6><a href="">{{$v->goods_name}}</a></h6>
 						<div class="price">
 							${{$v->goods_price}}

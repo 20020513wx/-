@@ -1,5 +1,5 @@
 @extends('layout.shop')
-@section('title','商品详情')
+@section('title','商品列表')
 @section('content')
 
 	<!-- navbar top -->
@@ -12,6 +12,8 @@
 
 	<!-- navbar bottom -->
     @include('layout.bottom')
+	<!-- end navbar bottom -->
+
 	<!-- end navbar bottom -->
 
 	<!-- menu -->
@@ -87,7 +89,7 @@
 				</div>
 				<div class="row">
 					<div class="col s4">
-						<a href="blog.html" class="button-link">
+						<a href="blog.html" class="button-link">	
 							<div class="menu-link">
 								<div class="icon">
 									<i class="fa fa-bold"></i>
@@ -97,7 +99,7 @@
 						</a>
 					</div>
 					<div class="col s4">
-						<a href="blog-single.html" class="button-link">
+						<a href="blog-single.html" class="button-link">	
 							<div class="menu-link">
 								<div class="icon">
 									<i class="fa fa-file-text-o"></i>
@@ -198,7 +200,7 @@
 						<div class="cart-1">
 							<div class="row">
 								<div class="col s5">
-									<img src="img/cart-menu1.png" alt="">
+									<img src="/static/img/cart-menu1.png" alt="">
 								</div>
 								<div class="col s7">
 									<h5><a href="">Fashion Men's</a></h5>
@@ -233,7 +235,7 @@
 						<div class="cart-2">
 							<div class="row">
 								<div class="col s5">
-									<img src="img/cart-menu2.png" alt="">
+									<img src="/static/img/cart-menu2.png" alt="">
 								</div>
 								<div class="col s7">
 									<h5><a href="">Fashion Men's</a></h5>
@@ -298,138 +300,58 @@
 	</div>
 	<!-- end cart menu -->
 
-	<!-- shop single -->
-	<div class="pages section">
+	<!-- product -->
+	<div class="section product product-list">
 		<div class="container">
-			<div class="shop-single">
-				<img src="/storage/{{$res->goods_img}}" alt="">
-				<h5>商品名称：{{$res['goods_name']}}</h5>
-				<div class="price">商品单价：${{$res['goods_price']}}</div>
-				<p id="goods_id" goods_id="{{$res->goods_id}}">商品简介：{{$res['goods_desc']}}</p>
-				<input type="text" id="buy_number">
-				<button type="button" class="btn button-default addCart">加入购物车</button>
+			<div class="pages-head">
+				<h3>PRODUCT LIST</h3>
 			</div>
-			<div class="col s9" id="shoucang" shoucang="{{$shoucang['s_id']}}">
-					<div class="review-title">
-						@if($shoucang['is_shoucang']==2)
-						<span>
-							<strong id="shoucang2"><font>❤</font>收藏</strong>
-						</span>
-						@else
-						<span>
-							<strong id="shoucang"><font color="red">❤</font>收藏</strong>
-						</span>
-						@endif
-					</div>
-				</div>
-			<div class="review">
-					<h5>n 条评论</h5>
-					<div class="review-details">
-						<div class="row">
-							<div class="col s3">
-								<img src="img/user-comment.jpg" alt="" class="responsive-img">
-							</div>
-							@foreach($pinglun as $k=>$v)
-							<div goods_id="{{$v->goods_id}}" class="col s9">
-								<div class="review-title">
-									<span><strong user_id="{{$v->id}}" class="user_id">{{$v->name}}</strong> | {{date('Y-m-d H:i:s',$v->p_time)}} | <a href="">回复</a></span>
-								</div>
-								<p>{{$v->p_content}}</p>
-							</div>
-							@endforeach
+			<div class="input-field">
+				<select >
+                    @foreach($category as $k=>$v)
+                    <p class="cateid"><option value="{{$v->cate_id}}">{{$v->cate_name}}</option></p>
+                    @endforeach
+				</select>
+			</div>
+			<div class="row">
+            @foreach($res as $k=>$v)
+				<div class="col s6">
+					<div class="content">
+						<a href="{{url('index/goodslists/'.$v->goods_id)}}"><img src="/storage/{{$v->goods_img}}" alt=""></a>
+						<h6><a href="">{{$v->goods_name}}</a></h6>
+						<div class="price">
+							${{$v->goods_price}}
 						</div>
+						<button class="btn button-default">加入购物车</button>
 					</div>
 				</div>
-				
-				<div class="review-form">
-					<div class="review-head">
-						<h5>在下面发布评论</h5>
-					</div>
-					<div class="row">
-						<form class="col s12 form-details">
-							<div class="input-field">
-								<textarea name="textarea-message" id="textarea1" cols="30" rows="10" class="materialize-textarea" class="validate" placeholder="YOUR REVIEW"></textarea>
-							</div>
-							<div class="form-button">
-								<div class="btn button-default aaaaa">点击评论</div>
-							</div>
-						</form>
-					</div>
-				</div>
+				@endforeach
+			</div>	
+			<div class="pagination-product">
+				<ul>
+					<li class="active">1</li>
+				</ul>
+			</div>
 		</div>
 	</div>
-	<!-- end shop single -->
+	<!-- end product -->
 
+	
 	<!-- loader -->
 	<div id="fakeLoader"></div>
 	<!-- end loader -->
-
+	
 	<!-- footer -->
 	@include('layout.foot')
 	<!-- end footer -->
-
-	@endsection
-<script src="/static/jquery.js"></script>
-<script>
-	//评论
-		$(document).ready(function(){
-			$('.aaaaa').click(function(){
-				var content=$('#textarea1').val();
-				var goods_id=$('#goods_id').attr('goods_id')
-				
-				$.ajax({
-					url:"{{url('index/pinglun')}}",
-					data:{content:content,goods_id:goods_id},
-					type:"post",
-					success:function(res){
-						if(res=='ok'){
-							alert("评论成功!请手动刷新");
-						}else{
-							alert("评论失败");
-						}
-					}
-				});
-			})
-			//收藏变为未收藏
-			$('#shoucang').click(function(){
-				var shoucang=$('#shoucang').attr('shoucang')
-				$.ajax({
-					url:"{{url('index/shoucang')}}",
-					data:{shoucang:shoucang},
-					type:"post",
-					success:function(res){
-						if(res=="ok"){
-							alert("取消收藏成功！请手动刷新");
-						}
-					}
-				});
-			})
-			//未收藏变为收藏
-			$('#shoucang2').click(function(){
-				var shoucang=$('#shoucang').attr('shoucang')
-				$.ajax({
-					url:"{{url('index/shoucang2')}}",
-					data:{shoucang:shoucang},
-					type:"post",
-					success:function(res){
-						if(res=="ok"){
-							alert("收藏成功！请手动刷新");
-						}
-					}
-				});
-			})
-			//加入购物车
-			$('.addCart').click(function(){
-				var goods_id=$('#goods_id').attr('goods_id')
-				var buy_number=$('#buy_number').val()
-				$.ajax({
-					url:"{{url('index/addCart')}}",
-					data:{goods_id:goods_id,buy_number:buy_number},
-					type:"post",
-					success:function(res){
-						console.log(res);
-					}
-				});
-			})
-		})
-</script>
+    @endsection
+    <script src="/static/jquery.js"></script>
+    <script>
+      
+            
+        $(function(){
+            $(document).on('click','.cateid',function(){
+                alert('1111');
+            })
+        });
+    </script>

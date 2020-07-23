@@ -154,5 +154,4 @@
             </div>
         </div>
     </div>
-    <!-- end footer -->
 @endsection

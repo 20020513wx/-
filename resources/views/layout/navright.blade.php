@@ -9,5 +9,8 @@
         <li><a href="contact.html"><i class="fa fa-envelope-o"></i>Contact Us</a></li>
         <li><a href="login.html"><i class="fa fa-sign-in"></i>Login</a></li>
         <li><a href="register.html"><i class="fa fa-user-plus"></i>Register</a></li>
+        <li><a href="{{url('index/order')}}"><i class="fa fa-envelope-o"></i>我的订单</a></li>
+        <li><a href="{{url('index/collect')}}"><i class="fa fa-sign-in"></i>我的收藏</a></li>
+        <li><a href="{{url('index/desc')}}"><i class="fa fa-user-plus"></i>我的评论</a></li>
     </ul>
 </div>

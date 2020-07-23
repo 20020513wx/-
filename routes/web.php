@@ -28,7 +28,7 @@ Route::prefix("index")->group(function (){
 
 
 
- 
+
 //后台管理员
 Route::prefix("/admin")->group(function (){
     Route::get("/reg","Admin\LoginController@reg");   //注册
@@ -64,6 +64,19 @@ Route::prefix("/admin")->middleware("islogin")->group(function(){
     Route::get('delete/{id}','Admin\UserController@delete');//删除
     Route::get('edit/{id}','Admin\UserController@edit');//编辑展示
     Route::post('update/{id}','Admin\UserController@update');//编辑执行
+});
+
+//前台购物车
+Route::prefix("/index")->group(function(){
+    //购车列表首页
+    Route::get('/cart','Index\CartController@cart');
+    //单删
+    Route::post('/cartDel','Index\CartController@cartDel');
+    //测试
+    Route::any('/test','Index\CartController@test');
+    //重新获取小计
+    Route::any('/toPrice','Index\CartController@toPrice');
+
 });
 
 

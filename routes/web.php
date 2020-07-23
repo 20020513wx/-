@@ -14,7 +14,15 @@ Route::prefix("index")->group(function () {
     //测试
     Route::get('/test', 'Index\LoginController@test');
 });
-
+//个人中心
+Route::prefix("/index")->group(function (){
+    //我的订单
+    Route::get("/order","Index\MyorderController@order");
+    //我的评论
+    Route::get("/desc","Index\MyorderController@desc");
+    //我的收藏
+    Route::get("/collect","Index\MyorderController@collect");
+});
 //前台用户
 Route::prefix("index")->group(function () {
     //登录
@@ -55,17 +63,6 @@ Route::prefix("/index")->group(function(){
 });
 
 
-//前台用户
-Route::prefix("index")->group(function (){
-   //登录
-    Route::get('/login','Index\LoginController@login');
-    //注册
-   Route::get('/reg','Index\LoginController@reg');
-});
-//购物车
-Route::prefix("/index")->group(function(){
-    Route::get('/cart','Index\CartController@cart');
-});
 
 //后台
 //后台管理员
@@ -103,12 +100,4 @@ Route::prefix("/admin")->middleware("islogin")->group(function(){
     Route::get('edit/{id}','Admin\UserController@edit');//编辑展示
     Route::post('update/{id}','Admin\UserController@update');//编辑执行
 });
-//个人中心
-Route::prefix("/index")->group(function (){
-    //我的订单
-    Route::get("/order","Index\MyorderController@order");
-    //我的评论
-    Route::get("/desc","Index\MyorderController@desc");
-    //我的收藏
-    Route::get("/collect","Index\MyorderController@collect");
-});
+

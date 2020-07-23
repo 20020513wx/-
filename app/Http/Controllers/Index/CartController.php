@@ -9,8 +9,7 @@ use App\Model\Goods;
 class CartController extends Controller
 {
     public function cart(){
-        session(["res"=>4]);
-        $res=session('res');
+        $res=session('id');
         $where=[
             "id"=>$res
         ];
@@ -39,7 +38,7 @@ class CartController extends Controller
     public function cartDel(){
         //删除购物车表
         $goodsmodel=new CartModel();
-        $id=session('res');
+        $id=session('id');
 //        echo $id; die;
         $goods_id=request()->goods_id;
         $where=[

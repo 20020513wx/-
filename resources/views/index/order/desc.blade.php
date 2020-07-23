@@ -1,19 +1,18 @@
 @extends("layout.shop")
 @section("title",'收货地址添加')
 @section('content')
-    @include('layout.top');
+    @include('layout.top')
     <!-- side nav right-->
-    @include('layout.navright');
+    @include('layout.navright')
     <!-- end side nav right-->
 
-    @include('layout.bottom');
+    @include('layout.bottom')
 
     <!-- single post -->
     <div class="pages section">
         <div class="container">
             <div class="blog-single">
 
-                <img src="/static/img/blog1.png" alt="">
                 <div class="blog-single-content">
                     <h5></h5>
                     <div class="date">
@@ -23,19 +22,13 @@
 
                         </span>
                     </div>
-                    @foreach($data as $v)
-                        评论用户<input type="text" placeholder="{{$v->id}}">
+                    @foreach($data as $k=>$v)
+                        <img src="/storage/{{$v->goods_img}}" alt="">
+                        评论用户<input type="text" placeholder="{{$v->name}}">
                         评论内容 <input type="text" placeholder="{{$v->p_content}}">
-                        评论商品 <input type="text" placeholder="{{$v->goods_id}}">
+                        评论商品 <input type="text" placeholder="{{$v->goods_name}}">
                     @endforeach
-                    <div class="share-post">
-                        <ul>
-                            <li><a href=""><i class="fa fa-facebook"></i></a></li>
-                            <li><a href=""><i class="fa fa-twitter"></i></a></li>
-                            <li><a href=""><i class="fa fa-google"></i></a></li>
-                            <li><a href=""><i class="fa fa-linkedin"></i></a></li>
-                        </ul>
-                    </div>
+
                 </div>
                 <div class="comment">
                     <h5>1 Comments</h5>

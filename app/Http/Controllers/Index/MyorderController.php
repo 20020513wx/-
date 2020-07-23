@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use App\Model\Order;
 use App\Model\Myorder;
 use App\Model\UserModel;
-use App\Model\Shouceng;
+use App\Model\Pinglun;
+use App\Model\Shoucang;
+use DB;
 class MyorderController extends Controller
 {
 //    我的订单
@@ -17,14 +19,16 @@ class MyorderController extends Controller
 
     //我的评论
     public function desc(){
-
-        session(["id"=>5]);
         $user_id=session("id");
+
         $where=[
-            ['id',"=",$user_id]
+            ['pinglun.id',"=",$user_id]
         ];
-        $date=Myorder::where($where)->get();
-        return view("index.order.desc",["data"=>$date]);
+        $data=Pinglun::where($where)
+            ->leftJoin('users','pinglun.id','=','users.id')
+            ->leftJoin('goods','pinglun.goods_id','=','goods.goods_id')
+            ->get();
+        return view("index.order.desc",["data"=>$data]);
 
     }
 
@@ -33,10 +37,10 @@ class MyorderController extends Controller
 
         $user_id=session("id");
         $where=[
-          ["id","=",$user_id],
-            ["is_shoucang","=",1]
+            "shoucang.id"=>$user_id,
+            "is_shoucang"=>1
         ];
-        $goods=Shouceng::where($where)->get();
+        $goods=Shoucang::where($where)->leftJoin('users','shoucang.id','=','users.id')->get();
         return view("index.order.collect",["goods"=>$goods]);
     }
 }

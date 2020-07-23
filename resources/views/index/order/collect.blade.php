@@ -1,12 +1,12 @@
 @extends("layout.shop")
 @section("title",'收货地址添加')
 @section('content')
-    @include('layout.top');
+    @include('layout.top')
     <!-- side nav right-->
-    @include('layout.navright');
+    @include('layout.navright')
     <!-- end side nav right-->
 
-    @include('layout.bottom');
+    @include('layout.bottom')
 
     <!-- single post -->
     <div class="pages section">
@@ -23,7 +23,8 @@
                             <div class="col s9">
                                 @foreach($goods as $v)
                                 <div class="comment-title">
-                                    <strong>用户名{{$v->id}}</strong></br>商品名称 {{$v->goods_name}} <a href=""></a></span>
+                                    <img src="/storage/{{$v->goods_img}}" alt="">
+                                    <strong>用户名:{{$v->name}}</strong></br>商品名称:{{$v->goods_name}} <a href=""></a></span>
                                 </div>
                                     @endforeach
                             </div>

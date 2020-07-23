@@ -4,10 +4,10 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Shouceng extends Model
+class Pinglun extends Model
 {
-    protected $table="shoucang";
-    protected $primaryKey="s_id";
+    protected $table="pinglun";
+    protected $primaryKey="p_id";
     public $timestamps=false;
     protected $guarded=[];
 }

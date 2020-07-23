@@ -1,28 +1,11 @@
+@extends("layout.bottom")
+@extends("layout.navright")
+@extends("layout.shop")
 
-@extends("layout.top")
 @section("title","登录")
 @section('content')
-<!-- side nav right-->
-<div class="side-nav-panel-right">
-    <ul id="slide-out-right" class="side-nav side-nav-panel collapsible">
-        <li class="profil">
-            <img src="/status/img/profile.jpg" alt="">
-            <h2>John Doe</h2>
-        </li>
-        <li><a href="setting.html"><i class="fa fa-cog"></i>Settings</a></li>
-        <li><a href="about-us.html"><i class="fa fa-user"></i>About Us</a></li>
-        <li><a href="contact.html"><i class="fa fa-envelope-o"></i>Contact Us</a></li>
-        <li><a href="login.html"><i class="fa fa-sign-in"></i>Login</a></li>
-        <li><a href="register.html"><i class="fa fa-user-plus"></i>Register</a></li>
-    </ul>
-</div>
-<!-- end side nav right-->
 
-
-
-
-
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 <!-- login -->
 <div class="pages section">
     <div class="container">
@@ -33,13 +16,13 @@
             <div class="row">
                 <form class="col s12">
                     <div class="input-field">
-                        <input type="text" class="validate" placeholder="USERNAME" required id="user_name">
+                        <input type="text" class="validate" placeholder="USERNAME" required id="name">
                     </div>
                     <div class="input-field">
-                        <input type="password" class="validate" placeholder="PASSWORD" required id="user_pwd">
+                        <input type="password" class="validate" placeholder="PASSWORD" required id="password">
                     </div>
                     <a href=""><h6>Forgot Password ?</h6></a>
-                    <a href="" class="btn button-default"id="login">LOGIN</a>
+                    <div class="btn button-default" id="login">LOGIN</div>
                 </form>
             </div>
         </div>
@@ -51,7 +34,6 @@
 <div id="fakeLoader"></div>
 <!-- end loader -->
 
-<!-- footer -->
 <div class="footer">
     <div class="container">
         <div class="about-us-foot">
@@ -70,15 +52,37 @@
         </div>
     </div>
 </div>
-<!-- end footer -->
+
 
 @endsection
-<script src="/jquery.js"></script>
+<script src="/static/jquery.js"></script>
 <script>
     $(document).on("click","#login",function () {
         var _this=$(this);
-        var user_name=$("#user_name").val();
-        var user_pwd=$("#user_pwd").val();
-        alert(user_name);
+        var name=$("#name").val();
+        var password=$("#password").val();
+        if(name ==""){
+            alert('用户名不能为空');
+            return false;
+        }
+        if(password ==""){
+            alert('密码不能为空');
+            return false;
+        }
+        $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
+        $.ajax({
+            url:"{{url("/index/login_do")}}",
+            type:"POST",
+            data:{password:password,name:name},
+            success:function(res) {
+                if(res.err_code=="006"){
+                    alert("登录成功");
+                    window.location.href="{{url('index/goodsindex')}}";
+                }else{
+                    alert("登录失败");
+                    return false;
+                }
+            }
+        });
     });
 </script>

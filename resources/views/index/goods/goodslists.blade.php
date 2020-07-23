@@ -1,17 +1,17 @@
 @extends('layout.shop')
-@section('title','商品列表')
+@section('title','商品详情')
 @section('content')
 
 	<!-- navbar top -->
-	@include('layout.top');
+	@include('layout.top')
 	<!-- end navbar top -->
 
 	<!-- side nav right-->
-    @include('layout.navright');
+    @include('layout.navright')
 	<!-- end side nav right-->
 
 	<!-- navbar bottom -->
-    @include('layout.bottom');
+    @include('layout.bottom')
 	<!-- end navbar bottom -->
 
 	<!-- menu -->
@@ -302,49 +302,56 @@
 	<div class="pages section">
 		<div class="container">
 			<div class="shop-single">
-				<img src="img/shop-single.png" alt="">
-				<h5>Fashion Men's</h5>
-				<div class="price">$20 <span>$28</span></div>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam eaque in non delectus, error iste veniam commodi mollitia, officia possimus, repellendus maiores doloribus provident. Itaque, ab perferendis nemo tempore! Accusamus</p>
-				<button type="button" class="btn button-default">ADD TO CART</button>
+				<img src="/storage/{{$res->goods_img}}" alt="">
+				<h5>商品名称：{{$res['goods_name']}}</h5>
+				<div class="price">商品单价：${{$res['goods_price']}}</div>
+				<p id="goods_id" goods_id="{{$res->goods_id}}">商品简介：{{$res['goods_desc']}}</p>
+				<input type="text" id="buy_number">
+				<button type="button" class="btn button-default addCart">加入购物车</button>
 			</div>
+			<div class="col s9" id="shoucang" shoucang="{{$shoucang['s_id']}}">
+					<div class="review-title">
+						@if($shoucang['is_shoucang']==2)
+						<span>
+							<strong id="shoucang2"><font>❤</font>收藏</strong>
+						</span>
+						@else
+						<span>
+							<strong id="shoucang"><font color="red">❤</font>收藏</strong>
+						</span>
+						@endif
+					</div>
+				</div>
 			<div class="review">
-					<h5>1 reviews</h5>
+					<h5>n 条评论</h5>
 					<div class="review-details">
 						<div class="row">
 							<div class="col s3">
 								<img src="img/user-comment.jpg" alt="" class="responsive-img">
 							</div>
-							<div class="col s9">
+							@foreach($pinglun as $k=>$v)
+							<div goods_id="{{$v->goods_id}}" class="col s9">
 								<div class="review-title">
-									<span><strong>John Doe</strong> | Juni 5, 2016 at 9:24 am | <a href="">Reply</a></span>
+									<span><strong user_id="{{$v->id}}" class="user_id">{{$v->name}}</strong> | {{date('Y-m-d H:i:s',$v->p_time)}} | <a href="">回复</a></span>
 								</div>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis accusantium corrupti asperiores et praesentium dolore.</p>
+								<p>{{$v->p_content}}</p>
 							</div>
+							@endforeach
 						</div>
 					</div>
 				</div>
+
 				<div class="review-form">
 					<div class="review-head">
-						<h5>Post Review in Below</h5>
-						<p>Lorem ipsum dolor sit amet consectetur*</p>
+						<h5>在下面发布评论</h5>
 					</div>
 					<div class="row">
 						<form class="col s12 form-details">
 							<div class="input-field">
-								<input type="text" required class="validate" placeholder="NAME">
-							</div>
-							<div class="input-field">
-								<input type="email" class="validate" placeholder="EMAIL" required>
-							</div>
-							<div class="input-field">
-								<input type="text" class="validate" placeholder="SUBJECT" required>
-							</div>
-							<div class="input-field">
 								<textarea name="textarea-message" id="textarea1" cols="30" rows="10" class="materialize-textarea" class="validate" placeholder="YOUR REVIEW"></textarea>
 							</div>
 							<div class="form-button">
-								<div class="btn button-default">POST REVIEW</div>
+								<div class="btn button-default aaaaa">点击评论</div>
 							</div>
 						</form>
 					</div>
@@ -358,7 +365,79 @@
 	<!-- end loader -->
 
 	<!-- footer -->
-	@include('layout.foot');
+	@include('layout.foot')
 	<!-- end footer -->
 
 	@endsection
+<script src="/static/jquery.js"></script>
+<script>
+	//评论
+		$(document).ready(function(){
+			$('.aaaaa').click(function(){
+				var content=$('#textarea1').val();
+				var goods_id=$('#goods_id').attr('goods_id')
+
+				$.ajax({
+					url:"{{url('index/pinglun')}}",
+					data:{content:content,goods_id:goods_id},
+					type:"post",
+					success:function(res){
+						if(res=='ok'){
+							alert("评论成功!请手动刷新");
+						}else{
+							alert("评论失败");
+						}
+					}
+				});
+			})
+			//收藏变为未收藏
+			$('#shoucang').click(function(){
+				var shoucang=$('#shoucang').attr('shoucang')
+                var goods_id=$('#goods_id').attr('goods_id')
+				$.ajax({
+					url:"{{url('index/shoucang')}}",
+					data:{shoucang:shoucang,goods_id:goods_id},
+					type:"post",
+					success:function(res){
+						if(res=="ok"){
+							alert("取消收藏成功！请手动刷新");
+						}
+					}
+				});
+			})
+			//未收藏变为收藏
+			$('#shoucang2').click(function(){
+				var shoucang=$('#shoucang').attr('shoucang')
+                var goods_id=$('#goods_id').attr('goods_id')
+				$.ajax({
+					url:"{{url('index/shoucang2')}}",
+					data:{shoucang:shoucang,goods_id:goods_id},
+					type:"post",
+					success:function(res){
+					    // console.log(res);
+						if(res=="ok"){
+							alert("收藏成功！请手动刷新");
+						}
+					}
+				});
+			})
+			//加入购物车
+			$('.addCart').click(function(){
+				var goods_id=$('#goods_id').attr('goods_id')
+				var buy_number=$('#buy_number').val()
+				$.ajax({
+					url:"{{url('index/addCart')}}",
+					data:{goods_id:goods_id,buy_number:buy_number},
+					type:"post",
+					success:function(res){
+						if(res=="ok"){
+							if(window.confirm("加入购物车成功！点击确定进入购物车")){
+								location.href="/index/cart/";
+							}
+
+						}
+					}
+				});
+			})
+		})
+</script>

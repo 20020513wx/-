@@ -10,6 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+//首页
+Route::get('/','Index\GoodsController@goodsindex');
 Route::prefix("index")->group(function () {
     //测试
     Route::get('/test', 'Index\LoginController@test');
@@ -35,8 +37,7 @@ Route::prefix("index")->group(function () {
 //前台
 //前台商品
 Route::prefix('index')->group(function(){
-    //首页
-    Route::get('/goodsindex','Index\GoodsController@goodsindex');
+    
     //商品列表
     Route::get('/goodsshop','Index\GoodsController@goodsshop');
     //详情页

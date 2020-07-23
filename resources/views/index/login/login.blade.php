@@ -77,7 +77,7 @@
             success:function(res) {
                 if(res.err_code=="006"){
                     alert("登录成功");
-                    window.location.href="{{url('index/goodsindex')}}";
+                    window.location.href="{{url('/')}}";
                 }else{
                     alert("登录失败");
                     return false;

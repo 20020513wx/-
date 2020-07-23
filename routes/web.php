@@ -34,9 +34,9 @@ Route::prefix("/index")->group(function (){
    //我的订单
     Route::get("/order","Index\MyorderController@order");
    //我的评论
-    Route::get("/desc/{goods_id}","Index\MyorderController@desc");
+    Route::get("/desc","Index\MyorderController@desc");
     //我的收藏
-    Route::get("/collect/{goods_id}","Index\MyorderController@collect");
+    Route::get("/collect","Index\MyorderController@collect");
 });
 
 

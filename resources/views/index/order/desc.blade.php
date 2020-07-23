@@ -15,10 +15,10 @@
 
                 <img src="/static/img/blog1.png" alt="">
                 <div class="blog-single-content">
-                    <h5>{{$res->goods_name}}</h5>
+                    <h5></h5>
                     <div class="date">
                         <span>
-                            <i class="fa fa-calendar"></i> Dec {{$res->goods_price}}, {{$res->goods_number}}
+                            <i class="fa fa-calendar"></i>
                             <input type="button" value="收藏">
 
                         </span>

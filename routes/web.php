@@ -37,7 +37,7 @@ Route::prefix("index")->group(function () {
 //前台
 //前台商品
 Route::prefix('index')->group(function(){
-    
+
     //商品列表
     Route::get('/goodsshop','Index\GoodsController@goodsshop');
     //详情页
@@ -101,4 +101,11 @@ Route::prefix("/admin")->middleware("islogin")->group(function(){
     Route::get('edit/{id}','Admin\UserController@edit');//编辑展示
     Route::post('update/{id}','Admin\UserController@update');//编辑执行
 });
-
+Route::get('ks/login','Admin\KsController@login');//登录
+Route::post('ks/loginDo','Admin\KsController@loginDo');//登录执行
+Route::get('ks/reg','Admin\KsController@reg');//注册
+Route::post('ks/regDo','Admin\KsController@regDo');//注册执行
+Route::middleware("kslogin")->get('ks/index','Admin\KsController@index');//主页
+Route::middleware("kslogin")->get('ks/create','Admin\KsController@create');//发布新闻
+Route::middleware("kslogin")->any('ks/store','Admin\KsController@store');//发布新闻执行
+Route::middleware("kslogin")->any('ks/stores','Admin\KsController@stores');//发布新闻执行

@@ -18,6 +18,7 @@ class CartController extends Controller
     }
     //重新获取小计
     public function toPrice(){
+        $user_id=session('id');
         $goods_id=request()->goods_id;
         $goods_price=request()->goods_price;
         $buy_number=request()->buy_number;
@@ -31,6 +32,12 @@ class CartController extends Controller
         }else if($buy_number<1){
             $buy_number=1;
         }
+        $wheres=[
+            ['goods_id','=',$goods_id],
+            ['id','=',$user_id]
+        ];
+        //
+        $cart=CartModel::where($wheres)->update(['buy_number'=>$buy_number]);
         $money=$buy_number*$goods_price;
         echo $money;
 
@@ -57,5 +64,13 @@ class CartController extends Controller
         $se=session('res');
         //dd($se);
     }
-
+    //查询底部购物车
+    public function catcart(){
+        $user_id=session('id');
+        $where=[
+            ['id','=',$user_id]
+        ];
+        $cartInfo=CartModel::where($where)->first();
+        return view('layout.bottoms',['cartInfo'=>$cartInfo]);
+    }
 }

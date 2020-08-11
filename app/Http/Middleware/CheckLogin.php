@@ -15,7 +15,8 @@ class CheckLogin
      */
     public function handle($request, Closure $next)
     {
-        if(empty($_COOKIE["userInfo"])){
+        $id=session('id');
+        if(empty($id)){
             return redirect('/index/login');
         }
         return $next($request);

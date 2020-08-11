@@ -87,7 +87,7 @@
 				</div>
 				<div class="row">
 					<div class="col s4">
-						<a href="blog.html" class="button-link">	
+						<a href="blog.html" class="button-link">
 							<div class="menu-link">
 								<div class="icon">
 									<i class="fa fa-bold"></i>
@@ -97,7 +97,7 @@
 						</a>
 					</div>
 					<div class="col s4">
-						<a href="blog-single.html" class="button-link">	
+						<a href="blog-single.html" class="button-link">
 							<div class="menu-link">
 								<div class="icon">
 									<i class="fa fa-file-text-o"></i>
@@ -187,25 +187,12 @@
 	<!-- end menu -->
 
 	<!-- cart menu -->
-	<div class="menus" id="animatedModal">
-		<div class="close-animatedModal close-icon">
-			<i class="fa fa-close"></i>
-		</div>
-		<div class="modal-content">
-			<div class="cart-menu">
-				<div class="container">
-					<div class="content">
-					</div>
-					<button class="btn button-default">Process to Checkout</button>
-				</div>
-			</div>
-		</div>
-	</div>
+
 	<!-- end cart menu -->
-	
+
 	<!-- slider -->
 	<div class="slider">
-		
+
 		<ul class="slides">
 			<li>
 				<img src="/static/img/slide1.jpg" alt="">
@@ -275,7 +262,7 @@
 	<!-- end product -->
 
 	<!-- promo -->
-	
+
 	<!-- end promo -->
 
 	<!-- product -->
@@ -294,11 +281,11 @@
 		</div>
 	</div>
 	<!-- end product -->
-	
+
 	<!-- loader -->
 	<div id="fakeLoader"></div>
 	<!-- end loader -->
-	
+
 	<!-- footer -->
 	@include('layout.foot')
 	<!-- end footer -->

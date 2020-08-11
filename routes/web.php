@@ -12,12 +12,10 @@
 */
 //首页
 Route::get('/','Index\GoodsController@goodsindex');
-Route::prefix("index")->group(function () {
-    //测试
-    Route::get('/test', 'Index\LoginController@test');
-});
+//测试
+Route::get('/test','Index\LoginController@test');
 //个人中心
-Route::prefix("/index")->group(function (){
+Route::prefix("/index")->middleware('CheckLogin')->group(function (){
     //我的订单
     Route::get("/order","Index\MyorderController@order");
     //我的评论
@@ -43,16 +41,16 @@ Route::prefix('index')->group(function(){
     //详情页
     Route::get('/goodslists/{id}','Index\GoodsController@goodslists');
     //评论
-    Route::any('/pinglun','Index\GoodsController@pinglun');
+    Route::middleware('CheckLogin')->any('/pinglun','Index\GoodsController@pinglun');
     //收藏变为未收藏
-    Route::any('/shoucang','Index\GoodsController@shoucang');
+    Route::middleware('CheckLogin')->any('/shoucang','Index\GoodsController@shoucang');
     //未收藏变为收藏
-    Route::any('/shoucang2','Index\GoodsController@shoucang2');
+    Route::middleware('CheckLogin')->any('/shoucang2','Index\GoodsController@shoucang2');
     //加入购物车
-    Route::any('/addCart','Index\GoodsController@addCart');
+    Route::middleware('CheckLogin')->any('/addCart','Index\GoodsController@addCart');
 });
 //前台购物车
-Route::prefix("/index")->group(function(){
+Route::prefix("/index")->middleware('CheckLogin')->group(function(){
     //购车列表首页
     Route::get('/cart','Index\CartController@cart');
     //单删
@@ -61,6 +59,8 @@ Route::prefix("/index")->group(function(){
     Route::any('/test','Index\CartController@test');
     //重新获取小计
     Route::any('/toPrice','Index\CartController@toPrice');
+    //查询底部购物车
+    Route::any('/catcart','Index\CartController@catcart');
 });
 
 

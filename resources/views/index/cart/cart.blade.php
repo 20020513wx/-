@@ -1,26 +1,28 @@
 @extends("layout.shop")
 @section("title",'收货地址添加')
 @section('content')
-    @include('layout.top');
+    @include('layout.top')
     <!-- side nav right-->
-    @include('layout.navright');
+    @include('layout.navright')
     <!-- end side nav right-->
 
-    @include('layout.bottom');
-    @foreach($cart as $k =>$v)
+    @include('layout.bottom')
+
         <div class="cart section">
             <div class="container">
                 <div class="pages-head">
                     <h3>CART</h3>
                 </div>
                 <tr class="content">
+                    @foreach($cart as $k =>$v)
                     <div class="cart-1">
-                        <div class="row">
+                        <div class="row ooo">
                             <div class="col s5">
                                 <h5>Image</h5>
                             </div>
-                            <div class="col s7">
+                            <div class="col s7 images">
                                 <img src="/storage/{{$v->goods_img}}" alt="">
+                                <span class=""></span>
                             </div>
                         </div>
                         <div class="row">
@@ -55,17 +57,22 @@
                                 <h5><i class="fa fa-trash" id="del" ></i></h5>
                             </div>
                         </div>
-
                         <div class="total">
-                            <div class="row">
-                                <div class="col s7">
-                                    <h5>小计</h5>
-                                </div>
-                                <div class="col s5 dd">
-                                    <h5></h5>
+                                <div class="row">
+                                    <div class="col s7">
+                                        <h5>小计</h5>
+                                    </div>
+                                    <div class="col s5 dd">
+                                        <h5></h5>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="row">
+
+
+                    </div>
+                    @endforeach
+                    <div class="total">
+                        <div class="row">
                             <div class="col s7">
                                 <h5>总价</h5>
                             </div>
@@ -73,17 +80,8 @@
                                 <h5>$20.00</h5>
                             </div>
                         </div>
-                            <div class="row">
-                            <div class="col s7">
-                                <h6>Total</h6>
-                            </div>
-                            <div class="col s5">
-                                <h6></h6>
-                            </div>
-                        </div>
-                        </div>
-                        <button class="btn button-default">Process to Checkout</button>
                     </div>
+                        <button class="btn button-default">Process to Checkout</button>
                 </tr>
             </div>
         </div>
@@ -93,7 +91,7 @@
             <!-- loader -->
             <div id="fakeLoader"></div>
             <!-- end loader -->
-        @endforeach
+
             <!-- footer -->
             <div class="footer">
                 <div class="container">
@@ -137,7 +135,7 @@
                         var _this=$(this);//当前失去焦点
                         //获取商品ID
                         var goods_id =_this.parents("#aaa").siblings("#bbb").attr("goods_id");
-                        // alert(goods_id);return  false
+                         //alert(goods_id);return  false
                         //1.验证文本框的值
                         var buy_number=_this.val();//购买数量
                         if(buy_number==""){
@@ -147,16 +145,39 @@
 
                         //重新获取小计
                         var goods_price =_this.parents("#aaa").next().find("p").attr('goods_price');
+
                         $.ajax({
                             url:"{{url('index/toPrice')}}",
                             type:"post",
                             data:{buy_number:buy_number,goods_id:goods_id,goods_price:goods_price},
                             success:function(res){
                                 _this.parents('#aaa').siblings(".total").find(".dd").children().text('￥'+res);
+                                //console.log(res)
                             }
                         });
                     });
-
+                    //获取商品总价
+                    $(document).on("click",'.images',function(){
+                        var _this=$(this)
+                        var xz=_this.children('span').text();
+                        if(xz=="已选中"){
+                            _this.children('span').text("")
+                            _this.children('span').removeClass("jjj")
+                        }else{
+                            _this.children('span').text("已选中")
+                            _this.children('span').addClass("jjj")
+                        }
+                        var aa=$(".jjj")
+                            console.log(aa)
+                        return false;
+                        var goods_id='';
+                         $(".jjj").each(function(index){
+                             goods_id+=$(this).parent().siblings("#bbb").attr('goods_id')+',';
+                             console.log(goods_id)
+                         })
+                        // goods_id=goods_id.substr(0,goods_id,length-1);
+                        //  console.log(goods_id)
+                    });
                 })
 
             </script>

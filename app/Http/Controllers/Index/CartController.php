@@ -64,13 +64,4 @@ class CartController extends Controller
         $se=session('res');
         //dd($se);
     }
-    //查询底部购物车
-    public function catcart(){
-        $user_id=session('id');
-        $where=[
-            ['id','=',$user_id]
-        ];
-        $cartInfo=CartModel::where($where)->first();
-        return view('layout.bottoms',['cartInfo'=>$cartInfo]);
-    }
 }

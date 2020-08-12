@@ -345,13 +345,3 @@
 	@include('layout.foot')
 	<!-- end footer -->
     @endsection
-    <script src="/static/jquery.js"></script>
-    <script>
-      
-            
-        $(function(){
-            $(document).on('click','.cateid',function(){
-                alert('1111');
-            })
-        });
-    </script>

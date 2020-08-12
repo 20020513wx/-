@@ -59,8 +59,6 @@ Route::prefix("/index")->middleware('CheckLogin')->group(function(){
     Route::any('/test','Index\CartController@test');
     //重新获取小计
     Route::any('/toPrice','Index\CartController@toPrice');
-    //查询底部购物车
-    Route::any('/catcart','Index\CartController@catcart');
 });
 
 

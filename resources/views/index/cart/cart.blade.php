@@ -21,7 +21,7 @@
                                 <h5>Image</h5>
                             </div>
                             <div class="col s7 images">
-                                <img src="/storage/{{$v->goods_img}}" alt="">
+                                <img src="/storage/{{$v->goods_img}}" width="300" height="300" alt="">
                                 <span class=""></span>
                             </div>
                         </div>

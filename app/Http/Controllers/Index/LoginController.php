@@ -15,6 +15,25 @@ class LoginController extends Controller
         $data=request()->except('_token');
         $name=$data['name'];
         $password=$data['password'];
+         $tel=$post['tel'];
+        if(empty($post['code'])){
+            echo "<script>alert('验证码不能为空');location.href='/index/reg'</script>";exit;
+        }
+        if ($post['code']!=$code){
+            echo "<script>alert('验证码有误');location.href='/index/reg'</script>";exit;
+        }
+        if ($tel!=$info['tel']){
+            echo "<script>alert('发送验证码手机号与当前手机号不符');location.href='/index/reg'</script>";exit;
+        }
+        if ((time()-$info['addtime'])>300){
+            echo "<script>alert('验证码已失效，请重新获取');location.href='/index/reg'</script>";exit;
+        }
+        $reg='/^1[3578]\d{9}$/';
+        $pwd_reg="/^\w{6,16}$/";
+        if(preg_match($reg,$post['tel'])<1){
+            header('Refresh:2,url=/login/reg');
+            echo "手机号有误";exit;
+        }
         //var_dump($password);die;
         $userInfo=UserModel::where('name',$name)->first();
         if(!$userInfo){
@@ -26,6 +45,7 @@ class LoginController extends Controller
             }
         }
         $se=session(["id"=>$userInfo['id']]);
+        session(['user'=>$userInfo]);
          return ["err_code" => 006, "msg" => "登录成功"];
     }
 
@@ -85,4 +105,10 @@ class LoginController extends Controller
         $se=session('id');
         dd($se);
     }
+
+
+
+
+     
+    
 }

@@ -239,7 +239,7 @@
 	<div class="section product">
 		<div class="container">
 			<div class="section-head">
-				<h4>NEW PRODUCT</h4>
+				<h4>ALL PRODUCT</h4>
 				<div class="divider-top"></div>
 				<div class="divider-bottom"></div>
 			</div>
@@ -269,13 +269,31 @@
 	<div class="section product">
 		<div class="container">
 			<div class="section-head">
-				<h4>TOP PRODUCT</h4>
+				<h4>NEW PRODUCT</h4>
 				<div class="divider-top"></div>
 				<div class="divider-bottom"></div>
 			</div>
-			<div class="pagination-product">
+			<div class="row margin-bottom">
+				@foreach($re as $k=>$v)
+				<div class="col s6">
+					<div class="content">
+						<a href="{{url('index/goodslists/'.$v->goods_id)}}"><img src="/storage/{{$v->goods_img}}" alt=""></a>
+						<h6><a href="">{{$v->goods_name}}</a></h6>
+						<div class="price">
+							${{$v->goods_price}}
+						</div>
+						<button class="btn button-default">加入购物车</button>
+					</div>
+				</div>
+				@endforeach
+			</div>
+		
+			<div class="section product">
+			
+	</div>
+	<div class="pagination-product">
 				<ul>
-					<li class="active">1</li>
+					{{$res->links()}}
 				</ul>
 			</div>
 		</div>

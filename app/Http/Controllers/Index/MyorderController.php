@@ -43,4 +43,8 @@ class MyorderController extends Controller
         $goods=Shoucang::where($where)->leftJoin('users','shoucang.id','=','users.id')->get();
         return view("index.order.collect",["goods"=>$goods]);
     }
+    public function quit(){
+        session(['user'=>null]);
+        return redirect('/');
+    }
 }

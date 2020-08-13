@@ -22,6 +22,8 @@ Route::prefix("/index")->middleware('CheckLogin')->group(function (){
     Route::get("/desc","Index\MyorderController@desc");
     //我的收藏
     Route::get("/collect","Index\MyorderController@collect");
+    //销毁
+    Route::get("/quit","Index\MyorderController@quit");
 });
 //前台用户
 Route::prefix("index")->group(function () {
@@ -53,6 +55,7 @@ Route::prefix('index')->group(function(){
 Route::prefix("/index")->middleware('CheckLogin')->group(function(){
     //购车列表首页
     Route::get('/cart','Index\CartController@cart');
+    // Route::get('/cart','Index\CartController@cart');
     //单删
     Route::post('/cartDel','Index\CartController@cartDel');
     //测试
@@ -60,6 +63,7 @@ Route::prefix("/index")->middleware('CheckLogin')->group(function(){
     //重新获取小计
     Route::any('/toPrice','Index\CartController@toPrice');
 });
+
 
 
 
@@ -107,3 +111,10 @@ Route::middleware("kslogin")->get('ks/index','Admin\KsController@index');//主�
 Route::middleware("kslogin")->get('ks/create','Admin\KsController@create');//发布新闻
 Route::middleware("kslogin")->any('ks/store','Admin\KsController@store');//发布新闻执行
 Route::middleware("kslogin")->any('ks/stores','Admin\KsController@stores');//发布新闻执行
+
+
+
+
+
+
+

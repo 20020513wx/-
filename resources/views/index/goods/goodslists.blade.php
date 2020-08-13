@@ -416,7 +416,8 @@
 					success:function(res){
 					    // console.log(res);
 						if(res=="ok"){
-							alert("收藏成功！请手动刷新");
+							alert("收藏成功");
+							location.href="{{url('index/collect')}}"
 						}
 					}
 				});
@@ -437,6 +438,7 @@
 
 						}
 					}
+				
 				});
 			})
 		})

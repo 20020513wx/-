@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\CartModel;
 use App\Model\Goods;
+use Illuminate\Support\Facades\Redis;
 class CartController extends Controller
 {
     public function cart(){
@@ -60,8 +61,30 @@ class CartController extends Controller
             echo  "no";
         }
     }
+    //点击照片存redis
+    public function gid(){
+        $goods_id=request()->goods_id;
+        Redis::hmset("hash",$goods_id,$goods_id);
+        $aa=Redis::hgetall("hash");
+        dd($aa);
+    }
+    //点击照片清除redis
+    public function gids(){
+        $goods_id=request()->goods_id;
+        Redis::hdel("hash",$goods_id);
+        $aa=Redis::hgetall("hash");
+        dd($aa);
+    }
     public function test(){
         $se=session('res');
         //dd($se);
+    }
+    //生成订单
+    public function order(){
+        $user_id=session("id");
+        $goods_id=Redis::hgetall("hash");
+            $cartInfo=CartModel::whereIn('goods_id',$goods_id)->get()->toArray();
+            dd($cartInfo);    
+        
     }
 }

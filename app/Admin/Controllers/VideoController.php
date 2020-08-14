@@ -70,7 +70,4 @@ class VideoController extends AdminController
         $form->file('path', __('Path'))->uniqueName()->move('video');
         return $form;
     }
-    public function li(){
-        echo "李敬辉";
-    }
 }

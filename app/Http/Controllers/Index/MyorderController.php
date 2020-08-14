@@ -9,6 +9,8 @@ use App\Model\Myorder;
 use App\Model\UserModel;
 use App\Model\Pinglun;
 use App\Model\Shoucang;
+use App\Model\Ordergoods;
+use Illuminate\Support\Facades\Redis;
 use DB;
 class MyorderController extends Controller
 {
@@ -50,28 +52,27 @@ class MyorderController extends Controller
 
     public function pay()
     {
-        //订单号
-
-        //价格
-
-        //用户
-
-        //商品id
+        $user_id=session("id");
+        $where=[
+            ['id','=',$user_id],
+            ['pay_status','=',1]
+        ];
+        $ordergoods=Order::where($where)->first();
         $param = [
-            'out_trade_no'=> time().mt_rand(11111,99999),
+            'out_trade_no'=> $ordergoods['order_no'],
             'product_code'=> 'FAST_INSTANT_TRADE_PAY',
-            'total_amount'=> 11.1,
+            'total_amount'=> $ordergoods['order_amount'],
             'subject'=> '商品支付',
         ];
         $pubParam = [
             'app_id'=> 2016101700707309,
             'method'=> 'alipay.trade.page.pay',
-            'return_url'=> 'http://www.baidu.com',   //同步通知地址
+            'return_url'=> 'http://x.liliqin.xyz',   //同步通知地址
             'charset'=> 'utf-8',
             'sign_type'=> 'RSA2',
             'timestamp'=> date('Y-m-d H:i:s'),
             'version'=> '1.0',
-            'notify_url'=> 'http://www.baidu.com',   // 异步通知
+            'notify_url'=> 'http://x.liliqin.xyz',   // 异步通知
             'biz_content'=> json_encode($param),
         ];
 
@@ -98,5 +99,24 @@ class MyorderController extends Controller
         openssl_free_key($res);
         $sign = base64_encode($sign);
         return $sign;
+    }
+
+    public function returnurl()
+    {
+        $sign=base64_decode($_GET['sign']);
+        $data=$_GET;
+        unset($data['sign']);
+        unset($data['sign_type']);
+        ksort($data);
+        $str='';
+        foreach($data as $k=>$v){
+            $str.=$k.'='.$v.'&';
+        }
+        $str=rtrim($str,'&');
+        $key=file_get_contents(storage_path('keys/pub_ali.key'));
+        $key=openssl_get_publickey($key);
+        $res=openssl_verify($str,$sign,$key, OPENSSL_ALGO_SHA256);
+        // dd($res);
+        return redirect('/');
     }
 }

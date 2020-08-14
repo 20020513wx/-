@@ -81,7 +81,7 @@
                             </div>
                         </div>
                     </div>
-                        <button class="btn button-default">Process to Checkout</button>
+                    <button class="btn button-default order">Process to Checkout</button>
                 </tr>
             </div>
         </div>
@@ -163,21 +163,34 @@
                         if(xz=="已选中"){
                             _this.children('span').text("")
                             _this.children('span').removeClass("jjj")
+                            var goods_id=_this.parent().next().next().next().next().attr("goods_id")
+                            $.ajax({
+                                url:"{{url('index/gids')}}",
+                                data:{goods_id:goods_id},
+                                type:"post",
+                                success:function(res){
+                                    console.log(res)
+                                }
+                            })
                         }else{
                             _this.children('span').text("已选中")
                             _this.children('span').addClass("jjj")
+                            var goods_id=_this.parent().next().next().next().next().attr("goods_id")
+                            $.ajax({
+                                url:"{{url('index/gid')}}",
+                                data:{goods_id:goods_id},
+                                type:"post",
+                                success:function(res){
+                                    console.log(res)
+                                }
+                            })
                         }
-                        var aa=$(".jjj")
-                            console.log(aa)
-                        return false;
-                        var goods_id='';
-                         $(".jjj").each(function(index){
-                             goods_id+=$(this).parent().siblings("#bbb").attr('goods_id')+',';
-                             console.log(goods_id)
-                         })
-                        // goods_id=goods_id.substr(0,goods_id,length-1);
-                        //  console.log(goods_id)
+                        
                     });
+                    //生成订单
+                    $(document).on("click",".order",function(){
+                        location.href="/index/order/";
+                    })
                 })
 
             </script>

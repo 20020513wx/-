@@ -39,7 +39,7 @@ Route::prefix('index')->group(function(){
     //商品列表
     Route::get('/goodsshop','Index\GoodsController@goodsshop');
     //详情页
-    Route::get('/goodslists/{id}','Index\GoodsController@goodslists');
+    Route::middleware('CheckLogin')->get('/goodslists/{id}','Index\GoodsController@goodslists');
     //评论
     Route::middleware('CheckLogin')->any('/pinglun','Index\GoodsController@pinglun');
     //收藏变为未收藏
@@ -51,6 +51,10 @@ Route::prefix('index')->group(function(){
 });
 //前台购物车
 Route::prefix("/index")->middleware('CheckLogin')->group(function(){
+    Route::any("/gid","Index\CartController@gid");//点击照片存redis
+    Route::any("/gids","Index\CartController@gids");//点击照片清除redis
+    Route::any("/order","Index\CartController@order");//生成订单
+    Route::any("/orderindex","Index\CartController@orderindex");//生成订单
     //购车列表首页
     Route::get('/cart','Index\CartController@cart');
     //单删
@@ -108,5 +112,6 @@ Route::middleware("kslogin")->get('ks/create','Admin\KsController@create');//发
 Route::middleware("kslogin")->any('ks/store','Admin\KsController@store');//发布新闻执行
 Route::middleware("kslogin")->any('ks/stores','Admin\KsController@stores');//发布新闻执行
 
-Route::get('pay','Index\MyorderController@pay');
+Route::get('pay/{id}','Index\MyorderController@pay');
+Route::get('returnurl','Index\MyorderController@returnurl');
 Route::get("index/quit","Index\LoginController@quit");//销毁

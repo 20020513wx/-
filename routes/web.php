@@ -54,6 +54,7 @@ Route::prefix("/index")->middleware('CheckLogin')->group(function(){
     Route::any("/gid","Index\CartController@gid");//点击照片存redis
     Route::any("/gids","Index\CartController@gids");//点击照片清除redis
     Route::any("/order","Index\CartController@order");//生成订单
+    Route::any("/orderindex","Index\CartController@orderindex");//生成订单
     //购车列表首页
     Route::get('/cart','Index\CartController@cart');
     //单删

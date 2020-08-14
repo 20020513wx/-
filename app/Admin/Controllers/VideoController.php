@@ -54,7 +54,6 @@ class VideoController extends AdminController
         $show->field('status', __('Status'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
-
         return $show;
     }
 

@@ -15,6 +15,7 @@ class LoginController extends Controller
         $data=request()->except('_token');
         $name=$data['name'];
         $password=$data['password'];
+
         //var_dump($password);die;
         $userInfo=UserModel::where('name',$name)->first();
         if(!$userInfo){
@@ -26,6 +27,7 @@ class LoginController extends Controller
             }
         }
         $se=session(["id"=>$userInfo['id']]);
+        session(['user'=>$userInfo]);
          return ["err_code" => 006, "msg" => "登录成功"];
     }
 
@@ -37,7 +39,6 @@ class LoginController extends Controller
     public function reg_do(){
         $data=request()->except('_token');
         //var_dump($password);die;
-        //dd($data);
         //验证用户名
         if (!preg_match("/^[\u4E00-\u9FA5]{1,6}$/", $data['name']) == false ) {
             return ["err_code" => 001, "msg" => "用户名由中文组成,长度1-6位"];
@@ -85,4 +86,15 @@ class LoginController extends Controller
         $se=session('id');
         dd($se);
     }
+    //退出
+    public function quit(){
+        session(['user'=>null]);
+        return redirect('/');
+//        echo 111;
+    }
+
+
+
+
+
 }

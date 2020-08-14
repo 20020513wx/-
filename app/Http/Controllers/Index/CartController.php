@@ -95,13 +95,14 @@ class CartController extends Controller
             'id'=>$user_id
         ];
         $res=Order::insert($data);
-        
+
         $where=[
             ['id','=',$user_id]
         ];
         $resss=Order::where($where)->get();
-        
+
         $ress=CartModel::where($where)->get();
+
         $datas=[
             'goods_id'=>$ress[0]['goods_id'],
             'goods_name'=>$ress[0]['goods_name'],
@@ -121,11 +122,14 @@ class CartController extends Controller
     //订单
     public function orderindex(){
         $goods_id=Redis::hgetall("hash");
-        $res=Ordergoods::whereIn('goods_id',$goods_id)->get();
+        $res=Ordergoods::whereIn('goods_id',$goods_id)->get()->toArray();
+
         $money=0;
         foreach($res as $k=>$v){
             $money+=$v['goods_price']*$v['buy_number'];
         }
+
         return view("index.cart.order",['res'=>$res,'money'=>$money]);
     }
+
 }

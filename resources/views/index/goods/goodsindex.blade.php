@@ -195,7 +195,7 @@
 
 		<ul class="slides">
 			<li>
-				<img src="/static/img/slide1.jpg" alt="">
+				<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597379463351&di=96f640a639f2474454b0ac54fccf1819&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201610%2F17%2F20161017235346_ymCWV.jpeg" alt="">
 				<div class="caption slider-content  center-align">
 					<h2>WELCOME TO MSTORE</h2>
 					<h4>Lorem ipsum dolor sit amet.</h4>
@@ -203,7 +203,7 @@
 				</div>
 			</li>
 			<li>
-				<img src="/static/img/slide2.jpg" alt="">
+				<img src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=702835865,3126427433&fm=15&gp=0.jpg" alt="">
 				<div class="caption slider-content center-align">
 					<h2>JACKETS BUSINESS</h2>
 					<h4>Lorem ipsum dolor sit amet.</h4>
@@ -211,7 +211,7 @@
 				</div>
 			</li>
 			<li>
-				<img src="/static/img/slide3.jpg" alt="">
+				<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597379716277&di=77739d156b52544ee336e4c7e00b275e&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F36cdae8fee1f3ccee63827bfaab53a3b240af22a235c2-waDvMX_fw658" alt="">
 				<div class="caption slider-content center-align">
 					<h2>FASHION SHOP</h2>
 					<h4>Lorem ipsum dolor sit amet.</h4>
@@ -239,7 +239,7 @@
 	<div class="section product">
 		<div class="container">
 			<div class="section-head">
-				<h4>NEW PRODUCT</h4>
+				<h4>ALL PRODUCT</h4>
 				<div class="divider-top"></div>
 				<div class="divider-bottom"></div>
 			</div>
@@ -269,13 +269,31 @@
 	<div class="section product">
 		<div class="container">
 			<div class="section-head">
-				<h4>TOP PRODUCT</h4>
+				<h4>NEW PRODUCT</h4>
 				<div class="divider-top"></div>
 				<div class="divider-bottom"></div>
 			</div>
-			<div class="pagination-product">
+			<div class="row margin-bottom">
+				@foreach($re as $k=>$v)
+				<div class="col s6">
+					<div class="content">
+						<a href="{{url('index/goodslists/'.$v->goods_id)}}"><img src="/storage/{{$v->goods_img}}" alt=""></a>
+						<h6><a href="">{{$v->goods_name}}</a></h6>
+						<div class="price">
+							${{$v->goods_price}}
+						</div>
+						<button class="btn button-default">加入购物车</button>
+					</div>
+				</div>
+				@endforeach
+			</div>
+
+			<div class="section product">
+
+	</div>
+	<div class="pagination-product">
 				<ul>
-					<li class="active">1</li>
+					{{$res->links()}}
 				</ul>
 			</div>
 		</div>

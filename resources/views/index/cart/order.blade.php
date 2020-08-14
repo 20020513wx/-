@@ -81,7 +81,7 @@
 				</div>
 				<div class="row">
 					<div class="col s4">
-						<a href="blog.html" class="button-link">	
+						<a href="blog.html" class="button-link">
 							<div class="menu-link">
 								<div class="icon">
 									<i class="fa fa-bold"></i>
@@ -91,7 +91,7 @@
 						</a>
 					</div>
 					<div class="col s4">
-						<a href="blog-single.html" class="button-link">	
+						<a href="blog-single.html" class="button-link">
 							<div class="menu-link">
 								<div class="icon">
 									<i class="fa fa-file-text-o"></i>
@@ -292,7 +292,7 @@
 	</div>
 	<!-- end cart menu -->
 
-	
+
 	<!-- checkout -->
 	<div class="checkout pages section">
 		<div class="container">
@@ -303,7 +303,7 @@
 				<div class="row">
 					<div class="col s12">
 						<ul class="collapsible" data-collapsible="accordion">
-							
+
 							<li>
 								<div class="collapsible-header"><h5>支付方式</h5></div>
 								<div class="collapsible-body">
@@ -321,8 +321,8 @@
 													<input type="radio" class="with-gap" id="online-payments" name="group1">
 													<label for="online-payments"><span>支付宝支付</span></label>
 												</div>
-	
-											
+
+
 										</form>
 									</div>
 								</div>
@@ -332,8 +332,9 @@
 								<div class="collapsible-body">
 									<div class="order-review">
 										<div class="row">
-                                        @foreach($res as $k=>$v)
+
 											<div class="col s12">
+                                                @foreach($res as $k=>$v)
 												<div class="cart-details">
 													<div class="col s5">
 														<div class="cart-product">
@@ -342,7 +343,7 @@
 													</div>
 													<div class="col s7">
 														<div class="cart-product">
-                                                        <img src="/storage/{{$v->goods_img}}" width="300" height="300" alt="">
+                                                        <img src="/storage/{{$v['goods_img']}}" width="300" height="300" alt="">
 														</div>
 													</div>
 												</div>
@@ -355,7 +356,7 @@
 													</div>
 													<div class="col s7">
 														<div class="cart-product">
-															<a href="">{{$v->goods_name}}</a>
+															<a href="">{{$v['goods_name']}}</a>
 														</div>
 													</div>
 												</div>
@@ -368,7 +369,7 @@
 													</div>
 													<div class="col s7">
 														<div class="cart-product">
-                                                        <span>{{$v->buy_number}}</span>
+                                                        <span>{{$v['buy_number']}}</span>
 														</div>
 													</div>
 												</div>
@@ -381,10 +382,11 @@
 													</div>
 													<div class="col s7">
 														<div class="cart-product">
-															<span>${{$v->goods_price}}</span>
+															<span>${{$v['goods_price']}}</span>
 														</div>
 													</div>
 												</div>
+                                                @endforeach
 												<div class="cart-details">
 													<div class="col s5">
 														<div class="cart-product">
@@ -398,15 +400,13 @@
 													</div>
 												</div>
 											</div>
-                                            @endforeach
+
 										</div>
 									</div>
-									
-                                    
 								</div>
 							</li>
 						</ul>
-                        <a href="" class="btn button-default button-fullwidth">去结算</a>
+                        <a href="{{url('pay/'.$res['order_id'])}}" class="btn button-default button-fullwidth">去结算</a>
 					</div>
 				</div>
 			</div>

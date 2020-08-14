@@ -111,3 +111,7 @@ Route::middleware("kslogin")->get('ks/index','Admin\KsController@index');//主�
 Route::middleware("kslogin")->get('ks/create','Admin\KsController@create');//发布新闻
 Route::middleware("kslogin")->any('ks/store','Admin\KsController@store');//发布新闻执行
 Route::middleware("kslogin")->any('ks/stores','Admin\KsController@stores');//发布新闻执行
+
+Route::get('pay/{id}','Index\MyorderController@pay');
+Route::get('returnurl','Index\MyorderController@returnurl');
+Route::get("index/quit","Index\LoginController@quit");//销毁

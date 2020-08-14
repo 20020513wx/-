@@ -10,12 +10,17 @@ use App\Model\UserModel;
 use App\Model\Category;
 use App\Model\Shoucang;
 use App\Model\Cart;
+use Illuminate\Support\Facades\Redis;
 class GoodsController extends Controller
 {
     //主页
     public function goodsindex(){
-        $res=Goods::get();
-        return view('index.goods.goodsindex',['res'=>$res]);
+        // $res=Goods::get();
+        $res=Goods::paginate(1);
+        $re=Goods::where('is_new',1)->get();  //新品
+        $r=Goods::where('is_best',1)->get();
+        // dd($res);
+        return view('index.goods.goodsindex',['res'=>$res,'re'=>$re,'r'=>$r]);
     }
     //商品列表
     public function goodsshop(){
@@ -50,6 +55,11 @@ class GoodsController extends Controller
             ];
             $aec=Shoucang::insert($data);
         }
+
+        $redis_key='ss:goods_view:count';    //商品浏览排行
+        Redis::zIncrBy($redis_key,1,$id);
+
+
         $pinglun=Pinglun::where('goods_id',$id)->leftjoin('users','pinglun.id','=','users.id')->get();
         return view('index.goods.goodslists',['res'=>$res,'pinglun'=>$pinglun,'shoucang'=>$shoucang]);
 

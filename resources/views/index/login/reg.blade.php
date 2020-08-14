@@ -25,6 +25,7 @@
                     <div class="input-field">
                         <input type="text" class="validate" placeholder="NAME" required id="name">
                     </div>
+                   
                     <div class="input-field">
                         <input type="email" placeholder="EMAIL" class="validate" required id="email">
                     </div>
@@ -67,6 +68,7 @@
 @endsection
 <script src="/static/jquery.js"></script>
 <script>
+
     $(document).on("click","#register",function () {
         var _this=$(this);
         var name=$("#name").val();

@@ -2,10 +2,13 @@
 
 namespace App\Model;
 
+use Encore\Admin\Traits\ModelTree;
 use Illuminate\Database\Eloquent\Model;
 use DB;
 class Category extends Model
 {
+    use ModelTree;
+
     public $table="category";
     public $timestamps=false;
     protected $primaryKey="cate_id";
@@ -31,5 +34,15 @@ class Category extends Model
         }
 
         return $array;
+    }
+
+    
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        $this->setParentColumn('parent_id');        //父级分类
+        $this->setOrderColumn('cate_id');        //排序字段
+        $this->setTitleColumn('cate_name');
     }
 }

@@ -247,7 +247,7 @@
 				@foreach($res as $k=>$v)
 				<div class="col s6">
 					<div class="content">
-						<a href="{{url('index/goodslists/'.$v->goods_id)}}"><img src="/storage/{{$v->goods_img}}" alt=""></a>
+						<a href="{{url('index/goodslists/'.$v->goods_id)}}"><img src="/upload/{{$v->goods_img}}" alt=""></a>
 						<h6><a href="">{{$v->goods_name}}</a></h6>
 						<div class="price">
 							${{$v->goods_price}}

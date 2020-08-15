@@ -115,3 +115,4 @@ Route::middleware("kslogin")->any('ks/stores','Admin\KsController@stores');//发
 Route::get('pay/{id}','Index\MyorderController@pay');
 Route::get('returnurl','Index\MyorderController@returnurl');
 Route::get("index/quit","Index\LoginController@quit");//销毁
+Route::get("codec","Index\Video@codec");//销毁

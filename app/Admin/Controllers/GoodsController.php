@@ -91,7 +91,7 @@ class GoodsController extends AdminController
         $form->number('is_up', __('是否上架'));
         $form->number('is_new', __('热卖'));
         $form->number('is_best', __('是否下架'));
-        $form->image('goods_img', __('商品图'));
+        $form->image('goods_img', __('商品图'))->dir('img');
         // $form->text('goods_imgs', __('Goods imgs'));
         $form->text('goods_desc', __('商品详情'));
         // $form->text('is_slide', __('Is slide'));

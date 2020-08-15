@@ -10,11 +10,8 @@ use App\Model\UserModel;
 use App\Model\Category;
 use App\Model\Shoucang;
 use App\Model\Cart;
-<<<<<<< HEAD
 use Illuminate\Support\Facades\Redis;
-=======
 use App\Model\Video;
->>>>>>> wuming
 class GoodsController extends Controller
 {
     //主页

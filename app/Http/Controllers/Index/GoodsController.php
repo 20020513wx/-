@@ -10,7 +10,11 @@ use App\Model\UserModel;
 use App\Model\Category;
 use App\Model\Shoucang;
 use App\Model\Cart;
+<<<<<<< HEAD
 use Illuminate\Support\Facades\Redis;
+=======
+use App\Model\Video;
+>>>>>>> wuming
 class GoodsController extends Controller
 {
     //主页
@@ -61,7 +65,14 @@ class GoodsController extends Controller
 
 
         $pinglun=Pinglun::where('goods_id',$id)->leftjoin('users','pinglun.id','=','users.id')->get();
-        return view('index.goods.goodslists',['res'=>$res,'pinglun'=>$pinglun,'shoucang'=>$shoucang]);
+        $v = Video::where(['goods_id'=>$id])->first();
+        if($v)
+        {
+            $goods_info['m3u8'] = $v->m3u8;
+        }else{
+            $goods_info['m3u8'] = "video/default.mp4";        //默认视频
+        }
+        return view('index.goods.goodslists',['res'=>$res,'pinglun'=>$pinglun,'shoucang'=>$shoucang,'v'=>$v]);
 
     }
     //评论

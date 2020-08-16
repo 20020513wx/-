@@ -328,6 +328,7 @@
 						<div class="row">
 							<div class="col s3">
 								<img src="img/user-comment.jpg" alt="" class="responsive-img">
+								<div class="prism-player" id="player-con"></div>
 							</div>
 							@foreach($pinglun as $k=>$v)
 							<div goods_id="{{$v->goods_id}}" class="col s9">
@@ -442,4 +443,22 @@
 				});
 			})
 		})
+</script>
+<script>
+var player = new Aliplayer({
+  "id": "player-con",
+  "source": "{{/storage/$v['m3u8']}}",
+  "width": "100%",
+  "height": "500px",
+  "autoplay": true,
+  "isLive": false,
+  "rePlay": false,
+  "playsinline": true,
+  "preload": true,
+  "controlBarVisibility": "hover",
+  "useH5Prism": true
+}, function (player) {
+    console.log("The player is created");
+  }
+);
 </script>

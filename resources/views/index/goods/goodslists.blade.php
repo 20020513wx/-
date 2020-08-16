@@ -366,11 +366,11 @@
 	<!-- end loader -->
 
 
-
+	@include('layout.foot')
 <script src="/static/jquery.js"></script>
 <script>
 	//评论
-		$(document).ready(function(){
+		$(document).ready(function(){	
 			$('.aaaaa').click(function(){
 				var content=$('#textarea1').val();
 				var goods_id=$('#goods_id').attr('goods_id')
@@ -466,7 +466,7 @@ var player = new Aliplayer({
 );
 </script>
 
-
+@endsection
 
 
 

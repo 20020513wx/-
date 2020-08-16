@@ -115,3 +115,8 @@ Route::middleware("kslogin")->any('ks/stores','Admin\KsController@stores');//发
 Route::get('pay/{id}','Index\MyorderController@pay');
 Route::get('returnurl','Index\MyorderController@returnurl');
 Route::get("index/quit","Index\LoginController@quit");//销毁
+
+
+
+Route::get('/reg/sendSMS', 'Index\LoginController@sendSMS'); //发送短信验证码
+Route::get('/reg/session', 'Index\LoginController@session'); //发送短信验证码

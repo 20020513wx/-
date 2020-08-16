@@ -25,7 +25,12 @@
                     <div class="input-field">
                         <input type="text" class="validate" placeholder="NAME" required id="name">
                     </div>
-                   
+                    <div class="input-field">
+                        <input type="text" name='tel' placeholder="请输入手机号" class="validate" id="tel" required>
+
+                        <input type="button" value="发送验证码" id='a'>
+                        <input type="text" name="code" placeholder="请输入验证码" id="code">
+                    </div>
                     <div class="input-field">
                         <input type="email" placeholder="EMAIL" class="validate" required id="email">
                     </div>
@@ -69,12 +74,39 @@
 <script src="/static/jquery.js"></script>
 <script>
 
+    $(document).on('click','#a',function(){
+        var name=$('input[name="tel"]').val();
+        var mobilereg=/^1[3|5|6|7|8|9]\d{9}$/;
+        // alert(mobilereg.test(name));
+        if(mobilereg.test(name)){
+            //发送手机验证码
+            $.get("/reg/sendSMS",{name:name},function(result){
+                // alert(result)
+                if (result.code=='00001') {
+                    alert(result.msg);
+                }
+                if (result.code=='00000') {
+                    alert(result.msg);
+                }
+
+            },'json');
+            return;
+        }
+        alert("请输入正确的手机号");
+    })
     $(document).on("click","#register",function () {
         var _this=$(this);
         var name=$("#name").val();
         var password=$("#password").val();
         var email=$("#email").val();
-        //alert(password);
+        var tel=$('#tel').val();
+        var code=$('#code').val();
+        
+        if (!code) {
+            alert("验证码不能为空");
+            return false;
+        };
+          //alert(password);
         //验证名称由中文组成
         var pattern = /^[\u4E00-\u9FA5]{1,6}$/;
         if(!pattern.test(name)) {
@@ -102,7 +134,7 @@
         $.ajax({
            url:"{{url("/index/reg_do")}}",
             type:"POST",
-            data:{name:name,email:email,password:password},
+            data:{name:name,email:email,password:password,tel:tel,code:code},
             success:function(res) {
 
                 if(res.err_code=="000"){

@@ -16,12 +16,12 @@ class GoodsController extends Controller
 {
     //主页
     public function goodsindex(){
-        // $res=Goods::get();
-        $res=Goods::paginate(1);
+         $res=Goods::paginate(1);
+//        $res=Goods::get();
         $re=Goods::where('is_new',1)->get();  //新品
-        $r=Goods::where('is_best',1)->get();
+//        $r=Goods::where('is_best',1)->get();
         // dd($res);
-        return view('index.goods.goodsindex',['res'=>$res,'re'=>$re,'r'=>$r]);
+        return view('index.goods.goodsindex',['res'=>$res,'re'=>$re]);
     }
     //商品列表
     public function goodsshop(){

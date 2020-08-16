@@ -19,13 +19,15 @@
 	<link rel="stylesheet" href="/static/css/animate.css">
 	<link rel="stylesheet" href="/static/css/style.css">
 	<link rel="stylesheet" href="https://g.alicdn.com/de/prismplayer/2.8.8/skins/default/aliplayer-min.css" />
-    <script type="text/javascript" charset="utf-8" src="https://g.alicdn.com/de/prismplayer/2.8.8/aliplayer-min.js"></script>
+	
 	<link rel="shortcut icon" href="/static/img/favicon.png">
+
 
 </head>
 <body>
 @yield('content')
 <!-- scripts -->
+<script src="/static/jquery.js"></script>
 <script src="/static/js/jquery.min.js"></script>
 	<script src="/static/js/materialize.min.js"></script>
 	<script src="/static/js/owl.carousel.min.js"></script>
@@ -34,4 +36,3 @@
 	<script src="/static/js/main.js"></script>
 
 </body>
-</html>

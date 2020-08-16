@@ -1,18 +1,18 @@
+
+
+	<!-- end navbar top -->
 @extends('layout.shop')
 @section('title','商品详情')
-@section('content')
-
-	<!-- navbar top -->
-	@include('layout.top')
-	<!-- end navbar top -->
-
-	<!-- side nav right-->
-    @include('layout.navright')
-	<!-- end side nav right-->
-
+<!-- side nav right-->
+@include('layout.top')
+@include('layout.navright')
 	<!-- navbar bottom -->
-    @include('layout.bottom')
-	<!-- end navbar bottom -->
+@include('layout.bottom')
+<!-- end navbar bottom -->
+@section('content')
+<!-- end side nav right-->	
+
+
 
 	<!-- menu -->
 	<div class="menus" id="animatedModal2">
@@ -322,13 +322,13 @@
 						@endif
 					</div>
 				</div>
+				<div class="prism-player" id="player-con"></div>
 			<div class="review">
 					<h5>n 条评论</h5>
 					<div class="review-details">
 						<div class="row">
 							<div class="col s3">
 								<img src="img/user-comment.jpg" alt="" class="responsive-img">
-								<div class="prism-player" id="player-con"></div>
 							</div>
 							@foreach($pinglun as $k=>$v)
 							<div goods_id="{{$v->goods_id}}" class="col s9">
@@ -365,11 +365,8 @@
 	<div id="fakeLoader"></div>
 	<!-- end loader -->
 
-	<!-- footer -->
-	@include('layout.foot')
-	<!-- end footer -->
 
-	@endsection
+
 <script src="/static/jquery.js"></script>
 <script>
 	//评论
@@ -443,11 +440,17 @@
 				});
 			})
 		})
+
+
+
+
 </script>
+<script type="text/javascript" charset="utf-8" src="https://g.alicdn.com/de/prismplayer/2.8.8/aliplayer-min.js"></script>
+
 <script>
 var player = new Aliplayer({
   "id": "player-con",
-  "source": "{{/storage/$v['m3u8']}}",
+  "source": "/storage/{{$data['m3u8'] ?? '' }}",
   "width": "100%",
   "height": "500px",
   "autoplay": true,
@@ -462,3 +465,9 @@ var player = new Aliplayer({
   }
 );
 </script>
+
+
+
+
+
+

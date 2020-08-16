@@ -67,7 +67,7 @@ class VideoController extends AdminController
         $goods_id = isset($_GET['id']) ? intval($_GET['id']) : null;
         $form = new Form(new Video());
         $form->text('goods_id', __('Goods id'))->value($goods_id);
-        $form->file('path', __('Path'))->uniqueName()->move('video');
+        $form->file('path', __('视频'))->uniqueName()->move('video');
         return $form;
     }
 }

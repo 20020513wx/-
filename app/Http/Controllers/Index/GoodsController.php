@@ -57,19 +57,16 @@ class GoodsController extends Controller
             $aec=Shoucang::insert($data);
         }
 
-        $redis_key='ss:goods_view:count';    //商品浏览排行
-        Redis::zIncrBy($redis_key,1,$id);
-
-
         $pinglun=Pinglun::where('goods_id',$id)->leftjoin('users','pinglun.id','=','users.id')->get();
-        $v = Video::where(['goods_id'=>$id])->first();
-        if($v)
-        {
-            $goods_info['m3u8'] = $v->m3u8;
-        }else{
-            $goods_info['m3u8'] = "video/default.mp4";        //默认视频
-        }
-        return view('index.goods.goodslists',['res'=>$res,'pinglun'=>$pinglun,'shoucang'=>$shoucang,'v'=>$v]);
+        $v= Video::where(['goods_id'=>$id])->first();
+        // print_r($v);die;
+        // if($v)
+        // {
+        //     $pinglun['m3u8'] = $v->m3u8;
+        // }else{
+        //     $pinglun['m3u8'] = "video/default.mp4";        //默认视频
+        // }
+        return view('index.goods.goodslists',['res'=>$res,'pinglun'=>$pinglun,'shoucang'=>$shoucang,'data'=>$v]);
 
     }
     //评论

@@ -123,5 +123,5 @@ Route::get('/reg/sendSMS', 'Index\LoginController@sendSMS'); //发送短信验�
 Route::get('/reg/session', 'Index\LoginController@session'); //发送短信验证码
 
 Route::get("codec","Index\Video@codec");//销毁
-Route::any('/codec','Index\Video@codec');
+Route::any('/codec','Index\Video@codec'); //aaa
 

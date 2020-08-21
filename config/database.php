@@ -44,6 +44,18 @@ return [
         ],
 
         'mysql' => [
+            //读库
+            'read'  => [
+                'host'  => [
+                    env('MYSQL_READ1'),
+                ]
+            ],
+
+            //写库
+            'write' => [
+                'host'  => env('MYSQL_MASTER')
+            ],
+
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', '127.0.0.1'),

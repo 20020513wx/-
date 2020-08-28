@@ -18,23 +18,31 @@ class CheckLogin
      */
     public function handle($request, Closure $next)
     {
-        $_SERVER['uid'] = 0;        //默认未登录
+        $_SERVER['id'] = 0;   //默认未登录
         $token = Cookie::get('token');
-
+        // echo '<pre>';print_r($_SERVER);echo '</pre>';
+        // die;
+        //当前url地址
+        $current_url=$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+        // echo '<pre>';print_r($current_uri);echo '</pre>';die;
+        $_SERVER['current_url']=$current_url;
         if($token)
         {
-            //$token = Crypt::decryptString($token);        //解密cookie
-            $token_key = 'h:login_info:'.$token;
-            $u = Redis::hGetAll($token_key);
-
-            if(isset($u['uid']))        // 登录有效
+            $url = env("PASSPORT_HOST") . '/web/check/token?token='.$token;
+            $res = file_get_contents($url);
+            $data = json_decode($res,true);
+            
+            if($data['errno']==0)       //token有效
             {
-                $_SERVER['uid'] = $u['uid'];
-                $_SERVER['user_name'] = $u['user_name'];
+                $_SERVER['id'] = $data['data']['u']['id'];
+                $_SERVER['name'] = $data['data']['u']['name'];
+                $_SERVER['token'] = $token;
             }
+
         }
 
 
         return $next($request);
+        
     }
 }

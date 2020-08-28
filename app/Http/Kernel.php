@@ -64,6 +64,7 @@ class Kernel extends HttpKernel
         "islogin"   => \App\Http\Middleware\Login::class,
         "CheckLogin"   => \App\Http\Middleware\CheckLogin::class,
         "kslogin"   => \App\Http\Middleware\KsLogin::class,
+        "Phone"   => \App\Http\Middleware\Phone::class,
     ];
 
     /**

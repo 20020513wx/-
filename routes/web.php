@@ -11,7 +11,7 @@
 |
 */
 //首页
-Route::get('/','Index\GoodsController@goodsindex');
+Route::get('/','Index\GoodsController@goodsindex')->middleware('CheckLogin','Phone');
 //测试
 Route::get('/test','Index\LoginController@test');
 //个人中心
@@ -34,20 +34,20 @@ Route::prefix("index")->group(function () {
 });
 //前台
 //前台商品
-Route::prefix('index')->group(function(){
+Route::prefix('index')->middleware('CheckLogin')->group(function(){
 
     //商品列表
     Route::get('/goodsshop','Index\GoodsController@goodsshop');
     //详情页
-    Route::middleware('CheckLogin')->get('/goodslists/{id}','Index\GoodsController@goodslists');
+    Route::get('/goodslists/{id}','Index\GoodsController@goodslists');
     //评论
-    Route::middleware('CheckLogin')->any('/pinglun','Index\GoodsController@pinglun');
+    Route::any('/pinglun','Index\GoodsController@pinglun');
     //收藏变为未收藏
-    Route::middleware('CheckLogin')->any('/shoucang','Index\GoodsController@shoucang');
+    Route::any('/shoucang','Index\GoodsController@shoucang');
     //未收藏变为收藏
-    Route::middleware('CheckLogin')->any('/shoucang2','Index\GoodsController@shoucang2');
+    Route::any('/shoucang2','Index\GoodsController@shoucang2');
     //加入购物车
-    Route::middleware('CheckLogin')->any('/addCart','Index\GoodsController@addCart');
+    Route::any('/addCart','Index\GoodsController@addCart');
 });
 //前台购物车
 Route::prefix("/index")->middleware('CheckLogin')->group(function(){
@@ -125,3 +125,4 @@ Route::get('/reg/session', 'Index\LoginController@session'); //发送短信验�
 Route::get("codec","Index\Video@codec");//销毁
 Route::any('/codec','Index\Video@codec'); //aaa
 
+Route::get('/chat','Api\ChatController@index');           //聊天室
